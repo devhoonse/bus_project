@@ -1,0 +1,40 @@
+name: gomata_api
+channels:
+  - defaults
+dependencies:
+  - _libgcc_mutex=0.1=main
+  - _openmp_mutex=4.5=1_gnu
+  - ca-certificates=2021.7.5=h06a4308_1
+  - certifi=2021.5.30=py38h06a4308_0
+  - libedit=3.1.20210714=h7f8727e_0
+  - libffi=3.2.1=hf484d3e_1007
+  - libgcc-ng=9.3.0=h5101ec6_17
+  - libgomp=9.3.0=h5101ec6_17
+  - libstdcxx-ng=9.3.0=hd4cf53a_17
+  - ncurses=6.2=he6710b0_1
+  - openssl=1.1.1l=h7f8727e_0
+  - pip=21.2.2=py38h06a4308_0
+  - python=3.8.0=h0371630_2
+  - readline=7.0=h7b6447c_5
+  - setuptools=58.0.4=py38h06a4308_0
+  - sqlite=3.33.0=h62c20be_0
+  - tk=8.6.10=hbc83047_0
+  - wheel=0.37.0=pyhd3eb1b0_1
+  - xz=5.2.5=h7b6447c_0
+  - zlib=1.2.11=h7b6447c_3
+  - pip:
+    - aniso8601==9.0.1
+    - attrs==21.2.0
+    - click==8.0.1
+    - flask==2.0.1
+    - flask-restx==0.5.1
+    - gunicorn==20.1.0
+    - itsdangerous==2.0.1
+    - jinja2==3.0.1
+    - jsonschema==3.2.0
+    - markupsafe==2.0.1
+    - pyrsistent==0.18.0
+    - pytz==2021.1
+    - six==1.16.0
+    - werkzeug==2.0.1
+prefix: /home/centos/anaconda3/envs/gomata_api
