@@ -23,7 +23,7 @@ class Arrival(Resource):
         특정 정류장에서 특정 버스에 대한 도착 정보를 제공합니다.
         :return: {
             success: boolean,       // 요청 처리 성공 여부
-            requested: json,        // 요청받은 매개변수 설정
+            requested: json,        // 요청받은 매개변수 구성
             timestamp: timestamp    // 요청 처리 완료 시간
         }
         """

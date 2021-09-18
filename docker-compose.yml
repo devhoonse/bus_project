@@ -20,6 +20,19 @@ services:
     privileged: true
     stdin_open: true
 
+  nginx:
+    container_name: nginx
+    image: "nginx:0.01"
+    ports:
+      - "80:80"
+      - "81:81"
+      - "443:443"
+    volumes:
+      - D:\projects\pycharm\bus_project\nginx\container_log:/var/log/nginx
+    networks:
+      - backend
+    privileged: true
+
 #  nginx:
 #      container_name: nginx
 #      image: "nginx:0.20"
@@ -29,7 +42,7 @@ services:
 #       - "81:81"
 #       - "443:443"
 #      volumes:
-#       - /var/log/nginx:/var/log/nginx
+#       - /var/container_log/nginx:/var/container_log/nginx
 #      networks:
 #       - api
 #      privileged: true

@@ -23,7 +23,7 @@ class Timetable(Resource):
         버스 도착시간 분포 시간표를 제공합니다.
         :return: {
             success: boolean,       // 요청 처리 성공 여부
-            requested: json,        // 요청받은 매개변수 설정
+            requested: json,        // 요청받은 매개변수 구성
             timestamp: timestamp    // 요청 처리 완료 시간
         }
         """
