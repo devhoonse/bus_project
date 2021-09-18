@@ -1,6 +1,6 @@
 # GOMATA (고양시 마을버스 타요)
 
-## 0. recent version: `0.0.0` `@2021-09-18 02:27`
+## 0. recent version: `0.0.0` `@2021-09-19 18:32`
 ### 업데이트 내역
    1. 프론트엔드 페이지 초안이 작성되었습니다.
    2. 백엔드 API 문서 페이지가 작성되었습니다.
@@ -15,15 +15,20 @@
    1. `wyjang8838@gmail.com` `PM/PL`
    2. `devhoonse@gmail.com` `DEV`
 
-## 3. How to Run Test `작성 완료`
-   ### 1) run Serverside Renderer 
-   - 개발 페이지 확인 : http://localhost:3000
-   - 개발 서버 구동 
-      > cd frontend; \
-      yarn start;
+## 3. How to Run Test
+   ### 1) run Serverside Renderer `작성 완료`
+   - 개발 페이지 확인 : http://localhost:3030
+   - 호스트 포트 변경 : docker-compose.yml 의 ports 설정의 3030 부분 변경
+   - 개발 서버 구동 (도커 이미지)
+      > cd bus_project; \
+        docker build -t frontend-dev:0.01 ./frontend \
+        docker-compose up -d frontend-dev;
+     - 서버 종료
+      > docker-compose stop frontend-dev;
     
    ### 2) run API Server `작성 완료`
-   - API 문서(swagger) : http://localhost:8090/doc 
+   - API 문서(swagger) : http://localhost:8099/doc 
+   - 호스트 포트 변경 : docker-compose.yml 의 ports 설정의 8099 부분 변경
    - 서버 구동 (도커 이미지)
       > cd bus_project; \
         docker build -t api:0.01 ./api \
@@ -33,4 +38,4 @@
    
 
 ## 4. Production Deployment `작성 중`
-    docker-compose up -d;
+> docker-compose up -d;
