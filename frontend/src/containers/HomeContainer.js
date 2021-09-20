@@ -1,29 +1,47 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 
 import Home from '../components/Home';
 import { getArrival } from '../redux/home';
+import { getSetting } from "../redux/setting";
 
 
 const { useEffect } = React;
 
 
-const HomeContainerSkeleton = ({ arrival, loadingArrival, getArrival }) => {
+const HomeContainerSkeleton = ({ arrival, setting, loadingArrival, loadingSetting, getSetting, getArrival }) => {
+
+  const { bus_station_id, bus_id, subway_station_id } = setting.data;
 
   useEffect(() => {
     const fn = async () => {
       try {
-        await getArrival({ station_id: 'station_id_hardcoded', bus_id: 'bus_id_hardcoded'});
+        await getSetting({user_id: 'devhoonse',});
       } catch (error) {
         console.log(error);
       }
     };
     fn();
+  }, []);
 
-  }, [getArrival]);
+  useEffect(() => {
+    const fn = async () => {
+      try {
+        await getArrival({
+          bus_station_id,
+          bus_id,
+          subway_station_id,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fn();
+  }, [bus_station_id, bus_id, subway_station_id]);
 
   return (
     <Home arrival={arrival}
+          loadingSetting={loadingSetting}
           loadingArrival={loadingArrival}
     />
   );
@@ -31,11 +49,17 @@ const HomeContainerSkeleton = ({ arrival, loadingArrival, getArrival }) => {
 
 
 const makeContainer = connect(
-  ({ home, loading }) => ({
-    arrival: home.arrival,
-    loadingArrival: loading['home/GET_ARRIVAL'],
-  }),
+  context => {
+    const { home, setting, loading } = context;
+    return {
+      setting: setting,
+      arrival: home,
+      loadingSetting: loading['setting/GET_SETTING'],
+      loadingArrival: loading['home/GET_ARRIVAL'],
+    };
+  },
   {
+    getSetting,
     getArrival,
   }
 );

@@ -11,4 +11,5 @@ export const getSetting = ({ user_id }) => {
 };
 
 
-export const postSetting = ({ user_id }) => client.post('/api/setting', { user_id });
+export const postSetting = ({ bus_station_id, bus_id, subway_station_id }) =>
+    client.post('/api/setting', { bus_station_id, bus_id, subway_station_id });

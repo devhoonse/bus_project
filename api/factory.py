@@ -11,6 +11,8 @@ import controller
 def create_app(url_prefix: str = 'api'):
 
     app = Flask(__name__, static_folder='./static/')
+    with open('app.key', 'r') as app_key:
+        app.secret_key = app_key.read()  # 세션 관리를 위한 키 할당
 
     blueprint = Blueprint(url_prefix, __name__, url_prefix=f"/{url_prefix}")
     api = Api(blueprint,

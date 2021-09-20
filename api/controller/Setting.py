@@ -4,7 +4,7 @@
 import datetime
 
 # third-parties
-from flask import request, jsonify
+from flask import request, jsonify, session
 from flask_restx import Resource, Namespace, fields
 
 # user-defined Modules
@@ -32,9 +32,15 @@ class Setting(Resource):
 
         # todo: 반환 데이터 구조 정의하기
         res = jsonify({
-            'success': 'true',
+            'success': True,
             'params': request.args,
             'timestamp': timestamp,
+            'data': {
+                'bus_station_id': '행신초등학교',
+                'bus_id': '마을23',
+                'subway_station_id': '행신역',
+                **session.get('setting', dict())
+            },
         })
 
         return res
@@ -42,7 +48,9 @@ class Setting(Resource):
     @namespace.expect(namespace.model(
         'SettingModel',
         {
-            'user_id': fields.String(description='사용자 ID', required=True),
+            'bus_station_id': fields.String(description='버스 정류장 ID', required=True),
+            'bus_id': fields.String(description='버스 ID', required=True),
+            'subway_station_id': fields.String(description='지하철역 ID', required=True),
         }
     ))
     def post(self):
@@ -57,11 +65,14 @@ class Setting(Resource):
 
         timestamp = datetime.datetime.now()
 
+        session['setting'] = request.json
+
         # todo: 반환 데이터 구조 정의하기
         res = jsonify({
-            'success': 'true',
+            'success': True,
             'params': request.json,
             'timestamp': timestamp,
+            'data': session['setting'],
         })
 
         return res

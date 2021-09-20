@@ -33,8 +33,24 @@ class Arrival(Resource):
         # todo: 반환 데이터 구조 정의하기
         res = jsonify({
             'success': True,
-            'requested': request.args,
+            'params': request.args,
             'timestamp': timestamp,
+            'data': {
+                'next': {
+                    'bus': 10,
+                    'subway': {
+                        'upward': 1,
+                        'downward': 8,
+                    },
+                },
+                'next2': {
+                    'bus': 22,
+                    'subway': {
+                        'upward': 10,
+                        'downward': 15,
+                    },
+                },
+            },
         })
 
         return res

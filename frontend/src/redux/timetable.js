@@ -12,14 +12,18 @@ const GET_TIMETABLE_FAILURE = 'timetable/GET_TIMETABLE_FAILURE';
 export const getTimetable = createRequestThunk(GET_TIMETABLE, api.getTimetable);
 
 
-const initialState = {};
-
+const initialState = {
+  success: null,
+  params: null,
+  timestamp: null,
+  timetable: null,
+};
 
 const timetable = handleActions(
   {
     [GET_TIMETABLE_SUCCESS]: (state, action) => ({
       ...state,
-      timetable: action.payload,
+      ...action.payload,
     }),
   },
   initialState

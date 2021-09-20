@@ -1,4 +1,5 @@
 import { handleActions } from 'redux-actions';
+import { produce } from 'immer';
 
 import * as api from '../lib/api/arrival';
 import createRequestThunk from '../lib/createRequestThunk';
@@ -12,15 +13,27 @@ const GET_ARRIVAL_FAILURE = 'home/GET_ARRIVAL_FAILURE';
 export const getArrival = createRequestThunk(GET_ARRIVAL, api.getArrival);
 
 
-const initialState = {};
+const initialState = {
+  success: null,
+  params: {},
+  timestamp: null,
+  data: {},
+};
 
 
 const home = handleActions(
   {
-    [GET_ARRIVAL_SUCCESS]: (state, action) => ({
-      ...state,
-      arrival: action.payload,
-    }),
+    [GET_ARRIVAL_SUCCESS]: (state, {payload: input}) => produce(
+      state,
+      draft => {
+        draft.success = input.success;
+        draft.timestamp = input.timestamp;
+        draft.params.bus_station_id = input.params.bus_station_id;
+        draft.params.bus_id = input.params.bus_id;
+        draft.params.subway_station_id = input.params.subway_station_id;
+        draft.data = input.data;
+      }
+    ),
   },
   initialState
 );

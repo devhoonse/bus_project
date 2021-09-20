@@ -32,9 +32,10 @@ class Timetable(Resource):
 
         # todo: 반환 데이터 구조 정의하기
         res = jsonify({
-            'success': 'true',
-            'requested': request.args,
+            'success': True,
+            'params': request.args,
             'timestamp': timestamp,
+            'timetable': request.args,
         })
 
         return res

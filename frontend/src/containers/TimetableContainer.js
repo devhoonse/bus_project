@@ -32,7 +32,7 @@ const TimetableContainerSkeleton = ({ timetable, loadingTimetable, getTimetable 
 
 const makeContainer = connect(
   ({ timetable, loading }) => ({
-    timetable: timetable.timetable,
+    timetable: timetable,
     loadingTimetable: loading['timetable/GET_TIMETABLE'],
   }),
   {
