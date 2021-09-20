@@ -1,6 +1,6 @@
 # GOMATA (고양시 마을버스 타요)
 
-# 0. recent version: `0.0.0` `@2021-09-19 02:04`
+# 0. recent version: `0.0.1` `@2021-09-19`
 ## 업데이트 내역
    1. 프론트엔드 페이지 초안이 작성되었습니다.
    2. 백엔드 API 서버 도커 이미지가 작성되었습니다.
@@ -18,6 +18,8 @@
 
 # 3. How to Run Test
    ## 0) 전체 서비스 한 번에 기동하기
+   - ### 전체 서비스 구성도
+     ![ex_screenshot](api/media/img/fe9c093d-4312-45a9-8f73-7f977db8d0d3.jpg)
    - ### 서비스 사용 테스트
      1. 프론트엔드 : http://localhost
      2. API 서버 : http://localhost/api

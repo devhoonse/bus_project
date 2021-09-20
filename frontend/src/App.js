@@ -1,9 +1,12 @@
 import React from 'react';
 import {NavLink, Route} from "react-router-dom";
 
-import Home from "./components/Home";
-import Timetable from "./components/Timetable";
-import Setting from "./components/Setting";
+// import Home from "./components/Home";
+// import Timetable from "./components/Timetable";
+// import Setting from "./components/Setting";
+import HomeContainer from "./containers/HomeContainer";
+import TimetableContainer from "./containers/TimetableContainer";
+import SettingContainer from "./containers/SettingContainer";
 
 
 const activeStyle = {
@@ -23,9 +26,9 @@ const App = () => {
           </ul>
           <hr />
           <div>
-            <Route path={"/"} component={Home} exact={true} />
-            <Route path={"/timetable"} component={Timetable} />
-            <Route path={"/setting"} component={Setting} />
+            <Route path={"/"} component={HomeContainer} exact={true} />
+            <Route path={"/timetable"} component={TimetableContainer} />
+            <Route path={"/setting"} component={SettingContainer} />
           </div>
         </div>
     );
