@@ -13,7 +13,7 @@
    3. Jira : https://devhoonse.atlassian.net/jira/software/projects/BUS/boards/1/roadmap
 
 # 2. Contact Us
-   1. `wyjang8838@gmail.com` `PM/PL`
+   1. `jangwy8838@gmail.com` `PM/PL`
    2. `devhoonse@gmail.com` `DEV`
 
 # 3. How to Run Test
