@@ -1,13 +1,13 @@
 import React from 'react';
 
 
-const Timetable = ({ loadingTimetable, timetable }) => {
+const Timetable = ({ loadingSetting, loadingTimetable, timetable }) => {
   return (
     <div>
       <section>
         <h1>시간표 화면</h1>
-        {loadingTimetable && '로딩 중 ...'}
-        {!loadingTimetable && timetable && (
+        {(loadingSetting || loadingTimetable) && '로딩 중 ...'}
+        {!(loadingSetting || loadingTimetable) && timetable && (
           JSON.stringify(timetable, null, 2)
         )}
       </section>

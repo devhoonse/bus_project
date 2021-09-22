@@ -2,28 +2,46 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import Timetable from "../components/Timetable";
-import {getTimetable} from "../redux/timetable";
+import timetable, {getTimetable} from "../redux/timetable";
+import {getSetting} from "../redux/setting";
 
 
 const { useEffect } = React;
 
 
-const TimetableContainerSkeleton = ({ timetable, loadingTimetable, getTimetable }) => {
+const TimetableContainerSkeleton = ({ timetable, setting, loadingTimetable, loadingSetting, getSetting, getTimetable }) => {
+
+  const { bus_station_id, bus_id, subway_station_id } = setting.data;
 
   useEffect(() => {
     const fn = async () => {
       try {
-        await getTimetable({ station_id: 'station_id_hardcoded', bus_id: 'bus_id_hardcoded'});
+        await getSetting({user_id: 'devhoonse',});
       } catch (error) {
         console.log(error);
       }
     };
     fn();
+  }, []);
 
-  }, [getTimetable]);
+  useEffect(() => {
+    const fn = async () => {
+      try {
+        await getTimetable({
+          bus_station_id,
+          bus_id,
+          subway_station_id,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fn();
+  }, [bus_station_id, bus_id, subway_station_id]);
 
   return (
     <Timetable timetable={timetable}
+               loadingSetting={loadingSetting}
                loadingTimetable={loadingTimetable}
     />
   );
@@ -31,11 +49,17 @@ const TimetableContainerSkeleton = ({ timetable, loadingTimetable, getTimetable 
 
 
 const makeContainer = connect(
-  ({ timetable, loading }) => ({
-    timetable: timetable,
-    loadingTimetable: loading['timetable/GET_TIMETABLE'],
-  }),
+  context => {
+    const { timetable, setting, loading } = context;
+    return {
+      setting: setting,
+      timetable: timetable,
+      loadingSetting: loading['setting/GET_SETTING'],
+      loadingTimetable: loading['timetable/GET_TIMETABLE'],
+    };
+  },
   {
+    getSetting,
     getTimetable,
   }
 );

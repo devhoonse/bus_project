@@ -1,4 +1,5 @@
 import { handleActions } from 'redux-actions';
+import produce from "immer";
 
 import * as api from '../lib/api/timetable';
 import createRequestThunk from '../lib/createRequestThunk';
@@ -14,17 +15,24 @@ export const getTimetable = createRequestThunk(GET_TIMETABLE, api.getTimetable);
 
 const initialState = {
   success: null,
-  params: null,
+  params: {},
   timestamp: null,
-  timetable: null,
+  timetable: {},
 };
 
 const timetable = handleActions(
   {
-    [GET_TIMETABLE_SUCCESS]: (state, action) => ({
-      ...state,
-      ...action.payload,
-    }),
+    [GET_TIMETABLE_SUCCESS]: (state, {payload: input}) => produce(
+      state,
+      draft => {
+        draft.success = input.success;
+        draft.timestamp = input.timestamp;
+        draft.params.bus_station_id = input.params.bus_station_id;
+        draft.params.bus_id = input.params.bus_id;
+        draft.params.subway_station_id = input.params.subway_station_id;
+        draft.timetable = input.timetable;
+      }
+    ),
   },
   initialState
 );

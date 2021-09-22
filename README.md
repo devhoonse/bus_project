@@ -25,6 +25,8 @@
      2. API 서버 : http://localhost/api
         1. 동작 확인 : http://localhost/api/arrival?station_id=where_is_it&bus_id=which_bus
      3. API 문서 : http://localhost/api/doc
+   - ### 프로젝트 내려받기
+        > git clone https://github.com/devhoonse/bus_project.git;
    - ### 모든 도커 이미지 빌드하기 `약 1~2 분 소요`
       > cd nginx; docker build . -t nginx:0.01; \
         cd ..; \

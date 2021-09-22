@@ -6,9 +6,9 @@ const Home = ({ loadingArrival, loadingSetting, arrival }) => {
     <div>
       <section>
         <h1>홈 화면</h1>
-        {(loadingArrival || loadingSetting) && '로딩 중 ...'}
+        {(loadingSetting || loadingArrival) && '로딩 중 ...'}
         <p>
-          {!(loadingArrival || loadingSetting) && arrival && (
+          {!(loadingSetting || loadingArrival) && arrival && (
             JSON.stringify(arrival, null, 2)
           )}
         </p>
