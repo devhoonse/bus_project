@@ -99,7 +99,6 @@ const App = () => {
             </li>
           </ul>
           <div className={"content"}>
-
             <Route path={"/"} component={HomeContainer} exact={true} />
             <Route path={"/timetable"} component={TimetableContainer} />
             <Route path={"/setting"} component={SettingContainer} />

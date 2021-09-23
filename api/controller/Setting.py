@@ -37,7 +37,7 @@ class Setting(Resource):
             'timestamp': timestamp,
             'data': {
                 'bus_station_id': '행신초등학교',
-                'bus_id': '마을23',
+                'bus_id': '023',
                 'subway_station_id': '행신역',
                 **session.get('setting', dict())
             },

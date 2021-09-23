@@ -1,10 +1,12 @@
 import React, {useCallback, useState} from 'react';
+import {withRouter} from "react-router-dom";
 import ImageFadeIn from "react-image-fade-in";
 
 
 const Intro = props => {
 
   const { imgSrc } = props;
+  const { match, location } = props;
 
   const [clicked, setClicked] = useState(false);
   const handleClick = useCallback(() => {
@@ -22,19 +24,19 @@ const Intro = props => {
              bottom: 0,
              width: 0,
              height: 0,
-             opacity: "0",
+             opacity: 0,
              visibility: "hidden",
              transition: "opacity 1s",
            }) : ({
              position: 'fixed',
              bottom: 0,
              maxWidth: '100%',
-             opacity: "1",
-             transition: "opacity 1s, width 1s",
+             opacity: 1,
+             transition: "opacity 1s , visibility 1s",
            })
          }
     />
   );
 };
 
-export default Intro;
+export default withRouter(Intro);
