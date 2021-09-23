@@ -60,20 +60,23 @@ const setting = handleActions(
         // draft.data.subway_station_id = input.data.subway_station_id;
       }
     ),
-    [POST_SETTING_SUCCESS]: (state, {payload: input} ) => produce(
-      state,
-      draft => {
-        draft.success = input.success;
-        draft.timestamp = input.timestamp;
-        draft.params.bus_id = input.params.bus_id;
-        draft.params.bus_station_id = input.params.bus_station_id;
-        draft.params.subway_station_id = input.params.subway_station_id;
-        draft.data = input.data;
-        // draft.data.bus_id = input.data.bus_id;
-        // draft.data.bus_station_id = input.data.bus_station_id;
-        // draft.data.subway_station_id = input.data.subway_station_id;
-      }
-    ),
+    [POST_SETTING_SUCCESS]: (state, {payload: input} ) => {
+      alert('설정 값이 성공적으로 저장되었습니다.');
+      return produce(
+        state,
+        draft => {
+          draft.success = input.success;
+          draft.timestamp = input.timestamp;
+          draft.params.bus_id = input.params.bus_id;
+          draft.params.bus_station_id = input.params.bus_station_id;
+          draft.params.subway_station_id = input.params.subway_station_id;
+          draft.data = input.data;
+          // draft.data.bus_id = input.data.bus_id;
+          // draft.data.bus_station_id = input.data.bus_station_id;
+          // draft.data.subway_station_id = input.data.subway_station_id;
+        }
+      );
+    },
     [CHANGE_INPUT_BUS]: (state, { payload: input }) => produce(
       state,
       draft => {

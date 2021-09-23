@@ -8,7 +8,7 @@ import label_subway_station from "../media/img/subway_station.png";
 
 const SettingBlock = styled.div`
   form {
-    margin-top: 6rem;
+    margin-top: 5rem;
     
     div.input-container {
       display: flex;
@@ -47,7 +47,7 @@ const SettingBlock = styled.div`
       max-width: 500px;
       margin-left: auto;
       margin-right: auto;
-      margin-top: 6rem;
+      margin-top: 5rem;
       border-radius: 5px;
       overflow: hidden;
       
