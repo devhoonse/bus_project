@@ -18,16 +18,18 @@ const Intro = props => {
          onClick={handleClick}
          style={
            clicked ? ({
-             position: 'fixed',
+             // position: 'fixed',
              top: 0,
              maxWidth: 0,
+             height: 0,
              opacity: "0",
              visibility: "hidden",
              transition: "opacity 1s",
            }) : ({
-             position: 'fixed',
+             // position: 'fixed',
              top: 0,
-             maxWidth: '500px',
+             maxWidth: '100%',
+             height: '100%',
              opacity: "1",
              transition: "opacity 1s , visibility 1s",
            })

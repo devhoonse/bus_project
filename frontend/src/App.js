@@ -36,7 +36,6 @@ const GomataTemplate = styled.div`
   // background: #5c7cfa;
 
   ul.navbar {
-    z-index: 1;
     // background: #22b8cf;
     // color: white;
     // height: 4rem;
@@ -73,6 +72,7 @@ const App = () => {
 
     return (
         <GomataTemplate>
+          <Intro imgSrc={home_cut} />
           <ul className={"navbar"}>
             <li id={"Home"}>
               <NavLinkButton to={"/"}
@@ -98,7 +98,6 @@ const App = () => {
             </li>
           </ul>
           <div className={"content"}>
-            <Intro imgSrc={home_cut} />
             <Route path={"/"} component={HomeContainer} exact={true} />
             <Route path={"/timetable"} component={TimetableContainer} />
             <Route path={"/setting"} component={SettingContainer} />
