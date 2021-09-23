@@ -67,6 +67,7 @@ const App = () => {
 
     return (
         <GomataTemplate>
+          <Intro imgSrc={home} />
           <ul className={"navbar"}>
             <li>
               <NavLinkButton to={"/"}
@@ -92,7 +93,6 @@ const App = () => {
             </li>
           </ul>
           <div className={"content"}>
-            <Intro imgSrc={home} />
             <Route path={"/"} component={HomeContainer} exact={true} />
             <Route path={"/timetable"} component={TimetableContainer} />
             <Route path={"/setting"} component={SettingContainer} />

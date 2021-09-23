@@ -23,10 +23,10 @@ const Intro = props => {
            clicked ? ({
              position: 'fixed',
              top: 0,
-             width: '450px',
+             width: 0,
              opacity: 0,
              visibility: "none",
-             transition: "opacity 1s , visibility 1s",
+             transition: "opacity 1s , visibility 1s , width 1s",
            }) : ({
              position: 'fixed',
              top: 0,
