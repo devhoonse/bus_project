@@ -25,7 +25,7 @@ import Intro from "./components/Intro";
 
 
 const GomataTemplate = styled.div`
-  max-width: 500px;
+  max-width: 100%;
   max-height: 834px;
 
   margin-left: auto;
@@ -40,6 +40,7 @@ const GomataTemplate = styled.div`
     // color: white;
     // height: 4rem;
     position: sticky;
+    top: 0;
     font-size: 1.5rem;
     display: flex;
     align-items: center;
@@ -61,7 +62,7 @@ const GomataTemplate = styled.div`
 
   div.content {
     background: white;
-    position: relative;
+    top: 0;
   }
 
 }
@@ -98,6 +99,7 @@ const App = () => {
             </li>
           </ul>
           <div className={"content"}>
+
             <Route path={"/"} component={HomeContainer} exact={true} />
             <Route path={"/timetable"} component={TimetableContainer} />
             <Route path={"/setting"} component={SettingContainer} />
