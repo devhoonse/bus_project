@@ -19,7 +19,7 @@ const NavLinkButton = props => {
       <NavLink to={to} activeClassName={"active"} exact>
         <img src={imgSrc}
              alt={`active ${to}`}
-             style={{ width: '150px', height: '150px', }}
+             style={{ width: '100%', height: '100%', }}
              onMouseOver={() => {setImgSrc(hover);}}
              onMouseOut={() => {setImgSrc((location.pathname === to) ? active : nonactive);}}
         />

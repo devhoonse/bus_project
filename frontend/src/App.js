@@ -24,7 +24,7 @@ import Intro from "./components/Intro";
 
 
 const GomataTemplate = styled.div`
-  width: 450px;
+  max-width: 500px;
 
   margin-left: auto;
   margin-right: auto;
@@ -45,8 +45,14 @@ const GomataTemplate = styled.div`
     margin: 0;
     list-style: none;
     
-    li {
-      
+    li#Home {
+      width: 33.3%;
+    }
+    li#Timetable {
+      width: 33.3%;
+    }
+    li#Setting {
+      flex: 1;
     }
   }
 
@@ -69,7 +75,7 @@ const App = () => {
         <GomataTemplate>
           <Intro imgSrc={home} />
           <ul className={"navbar"}>
-            <li>
+            <li id={"Home"}>
               <NavLinkButton to={"/"}
                              exact={true}
                              active={home_select}
@@ -77,14 +83,14 @@ const App = () => {
                              hover={home_hover}
               />
             </li>
-            <li>
+            <li id={"Timetable"}>
               <NavLinkButton to={"/timetable"}
                              active={schedule_select}
                              nonactive={schedule_default}
                              hover={schedule_hover}
               />
             </li>
-            <li>
+            <li id={"Setting"}>
               <NavLinkButton to={"/setting"}
                              active={setting_select}
                              nonactive={setting_default}
