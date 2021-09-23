@@ -1,36 +1,103 @@
 import React from 'react';
+import styled from "styled-components";
+import ImageFadeIn from "react-image-fade-in";
 import {NavLink, Route} from "react-router-dom";
 
 // import Home from "./components/Home";
 // import Timetable from "./components/Timetable";
 // import Setting from "./components/Setting";
+import NavLinkButton from "./components/button/NavLinkButton";
 import HomeContainer from "./containers/HomeContainer";
 import TimetableContainer from "./containers/TimetableContainer";
 import SettingContainer from "./containers/SettingContainer";
+import home from "./media/img/home.png";
+import home_default from "./media/img/home_default.png";
+import home_hover from "./media/img/home_hover.png";
+import home_select from "./media/img/home_select.png";
+import schedule_default from "./media/img/schedule_default.png";
+import schedule_hover from "./media/img/schedule_hover.png";
+import schedule_select from "./media/img/schedule_select.png";
+import setting_default from "./media/img/setting_default.png";
+import setting_hover from "./media/img/setting_hover.png";
+import setting_select from "./media/img/setting_select.png";
+import Intro from "./components/Intro";
 
 
-const activeStyle = {
-    background: 'black',
-    color: 'white',
-};
+const GomataTemplate = styled.div`
+  width: 450px;
+
+  margin-left: auto;
+  margin-right: auto;
+  // margin-top: 6rem;
+  border-radius: 5px;
+  overflow: hidden;
+  // background: #5c7cfa;
+
+  ul.navbar {
+    // background: #22b8cf;
+    // color: white;
+    // height: 4rem;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    
+    li {
+      
+    }
+  }
+
+  div.content {
+    background: white;
+    
+    img {
+      width: 450px;
+      transition: opacity 1s ease-out;
+    }
+  }
+
+}
+`;
 
 
 const App = () => {
 
     return (
-        <div>
-          <ul>
-            <li><NavLink to={"/"} activeStyle={activeStyle} exact>홈</NavLink></li>
-            <li><NavLink to={"/timetable"}  activeStyle={activeStyle}>시간표</NavLink></li>
-            <li><NavLink to={"/setting"} activeStyle={activeStyle}>설정</NavLink></li>
+        <GomataTemplate>
+          <ul className={"navbar"}>
+            <li>
+              <NavLinkButton to={"/"}
+                             exact={true}
+                             active={home_select}
+                             nonactive={home_default}
+                             hover={home_hover}
+              />
+            </li>
+            <li>
+              <NavLinkButton to={"/timetable"}
+                             active={schedule_select}
+                             nonactive={schedule_default}
+                             hover={schedule_hover}
+              />
+            </li>
+            <li>
+              <NavLinkButton to={"/setting"}
+                             active={setting_select}
+                             nonactive={setting_default}
+                             hover={setting_hover}
+              />
+            </li>
           </ul>
-          <hr />
-          <div>
+          <div className={"content"}>
+            <Intro imgSrc={home} />
             <Route path={"/"} component={HomeContainer} exact={true} />
             <Route path={"/timetable"} component={TimetableContainer} />
             <Route path={"/setting"} component={SettingContainer} />
           </div>
-        </div>
+        </GomataTemplate>
     );
 };
 
