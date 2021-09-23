@@ -21,7 +21,6 @@ const store = createStore(
     applyMiddleware(
       logger,
       ReduxThunk,
-      // composeWithDevTools,
     )
   ),
 );

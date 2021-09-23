@@ -11,6 +11,7 @@ import HomeContainer from "./containers/HomeContainer";
 import TimetableContainer from "./containers/TimetableContainer";
 import SettingContainer from "./containers/SettingContainer";
 import home from "./media/img/home.png";
+import home_cut from "./media/img/home_cut.png";
 import home_default from "./media/img/home_default.png";
 import home_hover from "./media/img/home_hover.png";
 import home_select from "./media/img/home_select.png";
@@ -25,6 +26,7 @@ import Intro from "./components/Intro";
 
 const GomataTemplate = styled.div`
   max-width: 500px;
+  max-height: 834px;
 
   margin-left: auto;
   margin-right: auto;
@@ -34,9 +36,11 @@ const GomataTemplate = styled.div`
   // background: #5c7cfa;
 
   ul.navbar {
+    z-index: 1;
     // background: #22b8cf;
     // color: white;
     // height: 4rem;
+    position: sticky;
     font-size: 1.5rem;
     display: flex;
     align-items: center;
@@ -46,10 +50,10 @@ const GomataTemplate = styled.div`
     list-style: none;
     
     li#Home {
-      width: 33.3%;
+      width: 33.33%;
     }
     li#Timetable {
-      width: 33.3%;
+      width: 33.33%;
     }
     li#Setting {
       flex: 1;
@@ -58,11 +62,7 @@ const GomataTemplate = styled.div`
 
   div.content {
     background: white;
-    
-    img {
-      width: 450px;
-      transition: opacity 1s ease-out;
-    }
+    position: relative;
   }
 
 }
@@ -73,7 +73,6 @@ const App = () => {
 
     return (
         <GomataTemplate>
-          <Intro imgSrc={home} />
           <ul className={"navbar"}>
             <li id={"Home"}>
               <NavLinkButton to={"/"}
@@ -99,6 +98,7 @@ const App = () => {
             </li>
           </ul>
           <div className={"content"}>
+            <Intro imgSrc={home_cut} />
             <Route path={"/"} component={HomeContainer} exact={true} />
             <Route path={"/timetable"} component={TimetableContainer} />
             <Route path={"/setting"} component={SettingContainer} />
