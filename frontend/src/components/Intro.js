@@ -22,13 +22,13 @@ const Intro = props => {
          style={
            clicked ? ({
              position: 'fixed',
-             width: 0,
+             'max-width': 0,
              opacity: 0,
              visibility: "none",
-             transition: "opacity 1s , visibility 1s , width 1s",
+             transition: "opacity 1s , visibility 1s , max-width 1s",
            }) : ({
              position: 'fixed',
-             width: '450px',
+             'max-width': '500px',
              opacity: 1,
              transition: "opacity 1s",
            })
