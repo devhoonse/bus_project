@@ -1,11 +1,17 @@
 # -*- coding: utf-8 -*-
 
 # third-parties
-from flask import Flask, Blueprint
+from flask import Flask, Blueprint, current_app
 from flask_restx import Api
 
 # user-defined Modules
 import controller
+from util.fileloader import loadStationInfo
+
+
+def configure_app_context(app):
+    with app.app_context():
+        current_app.stationInfo = loadStationInfo('')
 
 
 def create_app(url_prefix: str = 'api'):
@@ -23,9 +29,5 @@ def create_app(url_prefix: str = 'api'):
               doc='/doc')
     controller.apply_to(api)
     app.register_blueprint(blueprint)
-
-    # outer_app = DispatcherMiddleware(Flask('dummy_app'), {
-    #     app.config['APPLICATION_ROOT']: app
-    # })
 
     return app

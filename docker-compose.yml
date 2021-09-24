@@ -5,7 +5,9 @@ services:
     container_name: api
     image: "api:0.01"
     ports:
-     - "8099:8090"
+     - "7077:7070"
+    volumes:
+      - /home/ubuntu/src/data_collection:/home/gomata/src/api/static
     networks:
     - backend
     privileged: true

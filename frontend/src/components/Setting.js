@@ -27,7 +27,7 @@ const SettingBlock = styled.div`
         }
       }
       
-      input {
+      input, select {
         background: none;
         outline: none;
         border: none;
@@ -35,6 +35,11 @@ const SettingBlock = styled.div`
         font-size: 1rem;
         line-height: 1.5; 
         flex: 1;
+        
+        &:disabled {
+          -moz-appearance: none;
+          -webkit-appearance: none;
+        }
         
         &::placeholder {
           color: #dee2e6;
@@ -83,13 +88,25 @@ const SettingBlock = styled.div`
 
 
 const Setting = ({
-   loadingSetting, postingSetting, setting, onPostSetting, onChangeInputBus, onChangeInputSubwayStation, onChangeInputBusStation, marginY, readOnly
+   loadingSetting,
+   loadingAvailableSubwayStations,
+   loadingAvailableBusStations,
+   postingSetting,
+   setting,
+   availableSubwayStations,
+   availableBusStations,
+   onPostSetting,
+   onChangeInputBus,
+   onChangeInputSubwayStation,
+   onChangeInputBusStation,
+   marginY,
+   readOnly
 }) => {
   return (
     <SettingBlock marginY={marginY}>
       <section>
         {/*<h1>설정 화면</h1>*/}
-        {(loadingSetting || postingSetting) && '로딩 중 ...'}
+        {(loadingSetting || postingSetting || loadingAvailableSubwayStations) && '로딩 중 ...'}
         {/*<p>*/}
         {/*  {!(loadingSetting || postingSetting) && setting && (*/}
         {/*    JSON.stringify(setting, null, 2)*/}
@@ -100,17 +117,24 @@ const Setting = ({
             <label htmlFor={"subway_station_id"}>
               <img src={label_subway_station} />
             </label>
-            <input name={"subway_station_id"}
-                   list={"subway_station_ids"}
-                   placeholder={"지하철역 ID"}
-                   onChange={onChangeInputSubwayStation}
-                   value={setting.data.subway_station_id}
-                   readOnly={readOnly}
-            />
-            <datalist id={"subway_station_ids"}>
-              <option value={"행신역"}>행신역</option>
-              <option value={"화정역"}>화정역</option>
-            </datalist>
+            <select name={"subway_station_id"}
+                    placeholder={"지하철역 ID"}
+                    onChange={onChangeInputSubwayStation}
+                    value={setting.data.subway_station_id}
+                    disabled={readOnly}
+            >
+              {
+                !loadingAvailableSubwayStations && availableSubwayStations.data.list && (
+                  availableSubwayStations.data.list.map(
+                    stationInfo => (
+                      <option key={stationInfo.value} value={stationInfo.value}>
+                        {stationInfo.label}
+                      </option>
+                    )
+                  )
+                )
+              }
+            </select>
           </div>
 
           <div className={"input-container"}>
@@ -129,12 +153,30 @@ const Setting = ({
             <label htmlFor={"bus_station_id"}>
               <img src={label_bus_station} />
             </label>
-            <input name={"bus_station_id"}
-                   placeholder={"버스 정류장 ID"}
-                   onChange={onChangeInputBusStation}
-                   value={setting.data.bus_station_id}
-                   readOnly={readOnly}
-            />
+            <select name={"bus_station_id"}
+                    placeholder={"버스 정류장 ID"}
+                    onChange={onChangeInputBusStation}
+                    value={setting.data.bus_station_id}
+                    disabled={readOnly}
+            >
+              {
+                !loadingAvailableBusStations && availableBusStations.data.list && (
+                  availableBusStations.data.list.map(
+                    stationInfo => (
+                      <option key={stationInfo.value} value={stationInfo.value}>
+                        {stationInfo.label}
+                      </option>
+                    )
+                  )
+                )
+              }
+            </select>
+            {/*<input name={"bus_station_id"}*/}
+            {/*       placeholder={"버스 정류장 ID"}*/}
+            {/*       onChange={onChangeInputBusStation}*/}
+            {/*       value={setting.data.bus_station_id}*/}
+            {/*       readOnly={readOnly}*/}
+            {/*/>*/}
           </div>
 
           <div className={"button-container"} style={{ display: readOnly ? "none" : "flex", }}>

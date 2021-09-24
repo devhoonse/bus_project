@@ -7,6 +7,7 @@ from flask_restx import Api
 from controller import Arrival
 from controller import Setting
 from controller import Timetable
+from controller import Info
 
 
 def apply_to(api: Api) -> None:
@@ -20,3 +21,4 @@ def apply_to(api: Api) -> None:
     api.add_namespace(Arrival.namespace, '/arrival')
     api.add_namespace(Setting.namespace, '/setting')
     api.add_namespace(Timetable.namespace, '/timetable')
+    api.add_namespace(Info.namespace, '/info')

@@ -35,7 +35,6 @@ class Setting(Resource):
 
         timestamp = datetime.datetime.now()
 
-        # todo: 반환 데이터 구조 정의하기
         res = jsonify({
             'success': True,
             'params': request.args,
@@ -78,7 +77,6 @@ class Setting(Resource):
         session['setting'] = request.json
         session['setting']['bus_id'] = '023'
 
-        # todo: 반환 데이터 구조 정의하기
         res = jsonify({
             'success': True,
             'params': request.json,

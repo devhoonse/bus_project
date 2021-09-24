@@ -39,13 +39,13 @@ const Home = ({ loadingArrival, loadingSetting, arrival }) => {
             도착예정 : ({ !(loadingSetting || loadingArrival) &&
               arrival &&
               arrival.data.bus ?
-              arrival.data.bus.expectation : 99 }) 분 후 도착
+              arrival.data.bus.expectations[0] : 99 }) 분 후 도착
           </div>
           <div>
             실시간 : ({ !(loadingSetting || loadingArrival) &&
               arrival &&
               arrival.data.bus ?
-              arrival.data.bus.realtime : 99 }) 분 후 도착
+              arrival.data.bus.realtimes[0] : 99 }) 분 후 도착
           </div>
           <div>
             소요시간 : ({ !(loadingSetting || loadingArrival) &&
@@ -63,13 +63,13 @@ const Home = ({ loadingArrival, loadingSetting, arrival }) => {
             상행 : ({ !(loadingSetting || loadingArrival) &&
               arrival &&
               arrival.data.subway ?
-              new Date(arrival.data.subway.upward).toLocaleTimeString() : 'unknown' })
+              new Date(arrival.data.subway.upward).toLocaleTimeString().slice(0, -3) : 'unknown' })
           </div>
           <div>
             하행 : ({ !(loadingSetting || loadingArrival) &&
               arrival &&
               arrival.data.subway ?
-              new Date(arrival.data.subway.downward).toLocaleTimeString() : 'unknown' })
+              new Date(arrival.data.subway.downward).toLocaleTimeString().slice(0, -3) : 'unknown' })
           </div>
         </div>
       </section>

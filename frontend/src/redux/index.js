@@ -4,6 +4,7 @@ import loading from './loading';
 import home from "./home";
 import setting from "./setting";
 import timetable from "./timetable";
+import info from './info';
 
 
 const rootReducer = combineReducers({
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   home,
   setting,
   timetable,
+  info,
 });
 
 

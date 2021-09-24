@@ -101,7 +101,7 @@ const App = () => {
           <div className={"content"}>
             <Route path={"/"} component={HomeContainer} exact={true} />
             <Route path={"/timetable"} component={TimetableContainer} />
-            <Route path={"/setting"} component={SettingContainer} />
+            <Route path={"/setting"} render={() => <SettingContainer marginY={"2rem"} />} />
           </div>
         </GomataTemplate>
     );

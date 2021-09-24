@@ -9,6 +9,8 @@ from flask_restx import Resource, Namespace
 
 # user-defined Modules
 from controller.params import busArrivalQueryParams
+from util.fileloader import arrival_time_history
+from util.openapi import get_arrival_info
 
 
 namespace = Namespace(name='/arrival', description="버스 도착 정보 API")
@@ -28,7 +30,7 @@ class Arrival(Resource):
             data: {
                 bus: {
                     expectation: 예측치에 의한 마을버스 정류장까지 도착 예정 시간
-                    realtime: 경기버스 API 로부터 받은 현재 마을버스 정류장까지 도착 예정 시간
+                    realtimes: 경기버스 API 로부터 받은 현재 마을버스 정류장까지 도착 예정 시간
                     duration: 현재 마을버스 정류장에서 환승 전철역까지 걸리는 소요시간
                 },
                 subway: {
@@ -41,14 +43,38 @@ class Arrival(Resource):
 
         timestamp = datetime.datetime.now()
 
+        # todo: date 파라미터로 기준정보 일자 전달
+        try:
+            error_location = 'expectations'
+            expectations = arrival_time_history(
+                bus_id=request.args.get('bus_id'),
+                bus_station_id=request.args.get('bus_station_id'),
+            )
+            error_location = 'realtimes'
+            realtimes = get_arrival_info(
+                bus_id=request.args.get('bus_id'),
+                bus_station_id=request.args.get('bus_station_id'),
+            )
+        except (Exception, BaseException) as e:
+            return jsonify({
+                'success': False,
+                'params': request.args,
+                'timestamp': timestamp,
+                'data': {
+                    'list': [],
+                    'error_location': error_location,
+                    'error': str(e),
+                },
+            })
+
         res = jsonify({
             'success': True,
             'params': request.args,
             'timestamp': timestamp,
             'data': {
                 'bus': {
-                    'expectation': 8,
-                    'realtime': 6,
+                    'expectations': expectations,
+                    'realtimes': realtimes,
                     'duration': 9,
                 },
                 'subway': {
