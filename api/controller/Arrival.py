@@ -25,30 +25,35 @@ class Arrival(Resource):
             success: boolean,       // 요청 처리 성공 여부
             requested: json,        // 요청받은 매개변수 구성
             timestamp: timestamp    // 요청 처리 완료 시간
+            data: {
+                bus: {
+                    expectation: 예측치에 의한 마을버스 정류장까지 도착 예정 시간
+                    realtime: 경기버스 API 로부터 받은 현재 마을버스 정류장까지 도착 예정 시간
+                    duration: 현재 마을버스 정류장에서 환승 전철역까지 걸리는 소요시간
+                },
+                subway: {
+                    upward: 곧 도착 예정인 상행선 도착시간
+                    downward: 곧 도착 예정인 하행선 도착시간
+                }
+            }
         }
         """
 
         timestamp = datetime.datetime.now()
 
-        # todo: 반환 데이터 구조 정의하기
         res = jsonify({
             'success': True,
             'params': request.args,
             'timestamp': timestamp,
             'data': {
-                'next': {
-                    'bus': 10,
-                    'subway': {
-                        'upward': 1,
-                        'downward': 8,
-                    },
+                'bus': {
+                    'expectation': 8,
+                    'realtime': 6,
+                    'duration': 9,
                 },
-                'next2': {
-                    'bus': 22,
-                    'subway': {
-                        'upward': 10,
-                        'downward': 15,
-                    },
+                'subway': {
+                    'upward': datetime.datetime.now() + datetime.timedelta(minutes=5),
+                    'downward': datetime.datetime.now() + datetime.timedelta(minutes=10),
                 },
             },
         })

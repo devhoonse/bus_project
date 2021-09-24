@@ -26,7 +26,7 @@ import Intro from "./components/Intro";
 
 const GomataTemplate = styled.div`
   max-width: 100%;
-  max-height: 834px;
+  max-height: 100%;
 
   margin-left: auto;
   margin-right: auto;

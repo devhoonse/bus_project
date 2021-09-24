@@ -14,7 +14,8 @@
 
 # 2. Contact Us
    1. `jangwy8838@gmail.com` `PM/PL`
-   2. `devhoonse@gmail.com` `DEV`
+   2. `tnstndusqlc@gmail.com` `DGN`
+   3. `devhoonse@gmail.com` `DEV`
 
 # 3. How to Run Test
    ## 0) 전체 서비스 한 번에 기동하기

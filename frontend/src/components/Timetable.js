@@ -1,11 +1,14 @@
 import React from 'react';
 
+import SettingViewerContainer from "../containers/SettingViewerContainer";
+import SettingContainer from "../containers/SettingContainer";
+
 
 const Timetable = ({ loadingSetting, loadingTimetable, timetable }) => {
   return (
     <div>
       <section>
-        <h1>시간표 화면</h1>
+        {/*<h1>시간표 화면</h1>*/}
         {(loadingSetting || loadingTimetable) && '로딩 중 ...'}
         {!(loadingSetting || loadingTimetable) && timetable && (
           JSON.stringify(timetable, null, 2)

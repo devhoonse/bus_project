@@ -9,9 +9,7 @@ import {getSetting, postSetting, changeInputBus, changeInputSubwayStation, chang
 const { useEffect } = React;
 
 
-const SettingContainerSkeleton = ({ setting, loadingSetting, postingSetting, getSetting, postSetting }) => {
-
-  const dispatch = useDispatch();
+export const SettingContainerSkeleton = ({ setting, loadingSetting, postingSetting, getSetting, postSetting, marginY, readOnly }) => {
 
   const [onChangeInputBus, onChangeInputSubwayStation, onChangeInputBusStation] = useActions(
     [changeInputBus, changeInputSubwayStation, changeInputBusStation, ],
@@ -49,6 +47,8 @@ const SettingContainerSkeleton = ({ setting, loadingSetting, postingSetting, get
              onChangeInputBus={onChangeInputBus}
              onChangeInputBusStation={onChangeInputBusStation}
              onChangeInputSubwayStation={onChangeInputSubwayStation}
+             marginY={marginY}
+             readOnly={readOnly}
     />
   );
 };

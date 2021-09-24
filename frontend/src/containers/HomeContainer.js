@@ -4,6 +4,7 @@ import { connect, useSelector } from 'react-redux';
 import Home from '../components/Home';
 import { getArrival } from '../redux/home';
 import { getSetting } from "../redux/setting";
+import SettingContainer from "./SettingContainer";
 
 
 const { useEffect } = React;
@@ -40,10 +41,13 @@ const HomeContainerSkeleton = ({ arrival, setting, loadingArrival, loadingSettin
   }, [bus_station_id, bus_id, subway_station_id]);
 
   return (
-    <Home arrival={arrival}
-          loadingSetting={loadingSetting}
-          loadingArrival={loadingArrival}
-    />
+    <>
+      <SettingContainer marginY={"2rem"} readOnly={true} />
+      <Home arrival={arrival}
+            loadingSetting={loadingSetting}
+            loadingArrival={loadingArrival}
+      />
+    </>
   );
 };
 

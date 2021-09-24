@@ -25,6 +25,11 @@ class Setting(Resource):
             success: boolean,       // 요청 처리 성공 여부
             requested: json,        // 요청받은 매개변수 구성
             timestamp: timestamp    // 요청 처리 완료 시간
+            data: {                 // 유저 개인 설정 구성
+                bus_station_id: string,     // 버스 정류장
+                bus_id: string,             // 버스 노선
+                subway_station_id: string,  // 환승 정류장
+            }
         }
         """
 
@@ -36,7 +41,7 @@ class Setting(Resource):
             'params': request.args,
             'timestamp': timestamp,
             'data': {
-                'bus_station_id': '행신초등학교',
+                'bus_station_id': '218000089',
                 'bus_id': '023',
                 'subway_station_id': '행신역',
                 **session.get('setting', dict())
@@ -55,17 +60,23 @@ class Setting(Resource):
     ))
     def post(self):
         """
-        유저 개인 설정 구성을 제공합니다.
+        유저 개인 설정 구성을 서버 세션에 저장합니다. (향후 DB 저장 방식으로 변경 예정)
         :return: {
             success: boolean,       // 요청 처리 성공 여부
-            requested: json,        // 요청받은 매개변수 설정
+            requested: json,        // 요청받은 매개변수 구성
             timestamp: timestamp    // 요청 처리 완료 시간
+            data: {                 // 유저 개인 설정 구성
+                bus_station_id: string,     // 버스 정류장
+                bus_id: string,             // 버스 노선
+                subway_station_id: string,  // 환승 정류장
+            }
         }
         """
 
         timestamp = datetime.datetime.now()
 
         session['setting'] = request.json
+        session['setting']['bus_id'] = '023'
 
         # todo: 반환 데이터 구조 정의하기
         res = jsonify({

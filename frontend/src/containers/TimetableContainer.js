@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Timetable from "../components/Timetable";
 import timetable, {getTimetable} from "../redux/timetable";
 import {getSetting} from "../redux/setting";
+import SettingContainer from "./SettingContainer";
 
 
 const { useEffect } = React;
@@ -40,10 +41,13 @@ const TimetableContainerSkeleton = ({ timetable, setting, loadingTimetable, load
   }, [bus_station_id, bus_id, subway_station_id]);
 
   return (
-    <Timetable timetable={timetable}
-               loadingSetting={loadingSetting}
-               loadingTimetable={loadingTimetable}
-    />
+    <>
+      <SettingContainer marginY={"2rem"} readOnly={true} />
+      <Timetable timetable={timetable}
+                 loadingSetting={loadingSetting}
+                 loadingTimetable={loadingTimetable}
+      />
+    </>
   );
 };
 
