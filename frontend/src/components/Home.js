@@ -206,7 +206,7 @@ const Home = ({ loadingArrival, loadingSetting, arrival, setting, onRefresh }) =
             />
           </div>
 
-          <div className={"info-container"}>
+          <div className={"info-container"} style={{ 'margin-top': '2rem', }}>
             <label htmlFor={"total-time"}>
               <img src={total_time}
                    alt={"total-time"}
