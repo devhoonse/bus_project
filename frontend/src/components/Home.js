@@ -7,6 +7,7 @@ import subway_upward from "../media/img/home/sub_f.png";
 import subway_downward from "../media/img/home/sub_b.png";
 import inq_time from "../media/img/home/inq_time.png";
 import total_time from "../media/img/home/tot_time.png";
+import to_station from "../media/img/home/to_station.png";
 import wait_time from "../media/img/home/wait_time.png";
 import run_time from "../media/img/home/run_time.png";
 import walk_time from "../media/img/home/walk_time.png";
@@ -208,7 +209,7 @@ const Home = ({ loadingArrival, loadingSetting, arrival, setting, onRefresh }) =
 
           <div className={"info-container"} style={{ 'margin-top': '2rem', }}>
             <label htmlFor={"total-time"}>
-              <img src={total_time}
+              <img src={to_station}
                    alt={"total-time"}
               />
             </label>
