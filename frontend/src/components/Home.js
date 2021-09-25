@@ -207,8 +207,8 @@ const Home = ({ loadingArrival, loadingSetting, arrival, setting, onRefresh }) =
             />
           </div>
 
-          <div className={"subway-arrival"} style={{ 'margin-top': '2rem', 'margin-bottom': '0.5rem', 'color': '#f99'}}>
-            <b>지하철역 도착시간 : </b>
+          <div className={"subway-arrival"} style={{ 'margin-left': '1rem', 'margin-top': '2rem', 'margin-bottom': '0.5rem', 'color': '#f99'}}>
+            <b>지하철역 도착시간&nbsp;&nbsp;:&nbsp;&nbsp;</b>
             <span style={{ 'right': 0, }}>
                 {
                   !(loadingSetting || loadingArrival) &&
