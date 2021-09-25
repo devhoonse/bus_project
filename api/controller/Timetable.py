@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 # built-ins
+import os
+import base64
 import datetime
 
 # third-parties
@@ -30,12 +32,26 @@ class Timetable(Resource):
 
         timestamp = datetime.datetime.now()
 
+        timetable_url = f'{request.url_root}resource/data_collection/data/' \
+                        f'{request.args["bus_id"]}/schedule/' \
+                        f'{request.args["bus_station_id"]}.png'
+        image_path = os.path.join(
+            'static', 'data_collection', 'data',
+            request.args['bus_id'], 'schedule',
+            f'{request.args["bus_station_id"]}.png'
+        )
+        with open(image_path, "rb") as image_file:
+            encoded_image = base64.b64encode(image_file.read())
+
         # todo: 반환 데이터 구조 정의하기
         res = jsonify({
             'success': True,
             'params': request.args,
             'timestamp': timestamp,
-            'timetable': request.args,
+            'timetable': {
+                'byte_string': encoded_image.decode('ascii'),
+                'url': timetable_url,
+            },
         })
 
         return res

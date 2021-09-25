@@ -9,7 +9,7 @@ from flask_restx import Resource, Namespace
 
 # user-defined Modules
 from controller.params import busArrivalQueryParams
-from util.fileloader import arrival_time_history
+from util.fileloader import arrival_time_history, run_time_history, arrival_sub_time
 from util.openapi import get_arrival_info
 
 
@@ -50,11 +50,34 @@ class Arrival(Resource):
                 bus_id=request.args.get('bus_id'),
                 bus_station_id=request.args.get('bus_station_id'),
             )
+
             error_location = 'realtimes'
             realtimes = get_arrival_info(
                 bus_id=request.args.get('bus_id'),
                 bus_station_id=request.args.get('bus_station_id'),
             )
+            realtime = realtimes[0]['predictTime1'].strip()
+
+            error_location = 'duration'
+            duration = run_time_history(
+                bus_id=request.args.get('bus_id'),
+                bus_station_id=request.args.get('bus_station_id'),
+                subway_station_name=request.args.get('subway_station_id'),  # todo: 실제 id 로 교체작업 필요
+            )
+
+            error_location = 'subway'
+            total_duration = duration + 2 + 0
+            if realtime:
+                total_duration += int(realtime)
+            else:
+                total_duration += expectations[0]
+            est_arrival_time = datetime.datetime.now() + datetime.timedelta(minutes=total_duration)
+
+            subway = arrival_sub_time(
+                subway_station_name=request.args.get('subway_station_id'),
+                est_arrival_time=est_arrival_time,
+            )
+
         except (Exception, BaseException) as e:
             return jsonify({
                 'success': False,
@@ -75,12 +98,15 @@ class Arrival(Resource):
                 'bus': {
                     'expectations': expectations,
                     'realtimes': realtimes,
-                    'duration': 9,
+                    'realtime': realtime,
+                    'duration': duration,
                 },
                 'subway': {
-                    'upward': datetime.datetime.now() + datetime.timedelta(minutes=5),
-                    'downward': datetime.datetime.now() + datetime.timedelta(minutes=10),
+                    'upward': subway['upward'],
+                    'downward': subway['downward'],
                 },
+                'total_duration': total_duration,
+                'estimated_arrival_time': est_arrival_time,
             },
         })
 

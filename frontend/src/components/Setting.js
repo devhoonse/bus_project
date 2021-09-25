@@ -141,12 +141,16 @@ const Setting = ({
             <label htmlFor={"bus_id"}>
               <img src={label_bus} />
             </label>
-            <input name={"bus_id"}
-                   placeholder={"버스 ID"}
-                   onChange={onChangeInputBus}
-                   value={setting.data.bus_id}
-                   readOnly={true}
-            />
+            <select name={"bus_id"}
+                    placeholder={"버스 ID"}
+                    onChange={onChangeInputBus}
+                    value={setting.data.bus_id}
+                    disabled={true}
+            >
+              <option key={"241312015"} value={"241312015"}>
+                023
+              </option>
+            </select>
           </div>
 
           <div className={"input-container"}>

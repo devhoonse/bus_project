@@ -40,5 +40,5 @@ def get_arrival_info(bus_id, bus_station_id) -> dict:
 
     output_list = []
     if output_df.shape[0] > 0:
-        output_list = output_df.iloc[0].to_list()
+        output_list.append(dict(output_df.iloc[0]))
     return output_list

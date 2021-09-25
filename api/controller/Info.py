@@ -87,7 +87,7 @@ class AvailableBusStations(Resource):
         try:
             stations = find_station_list(
                 bus_id=request.args.get('bus_id'),
-                subway_station_id=request.args.get('subway_station_id'),
+                subway_station_name=request.args.get('subway_station_id'),  # todo: 실제 지하철역 ID 로 교체 작업 필요
             )
         except (Exception, BaseException) as e:
             return jsonify({

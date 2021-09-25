@@ -41,7 +41,7 @@ class Setting(Resource):
             'timestamp': timestamp,
             'data': {
                 'bus_station_id': '218000089',
-                'bus_id': '023',
+                'bus_id': '241312015',
                 'subway_station_id': '행신역',
                 **session.get('setting', dict())
             },
@@ -75,7 +75,7 @@ class Setting(Resource):
         timestamp = datetime.datetime.now()
 
         session['setting'] = request.json
-        session['setting']['bus_id'] = '023'
+        session['setting']['bus_id'] = '241312015'
 
         res = jsonify({
             'success': True,
