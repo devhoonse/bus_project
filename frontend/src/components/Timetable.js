@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 const TimetableBlock = styled.div`
   section {
-    margin-top: 2rem;
+    // margin-top: 0.5rem;
     display: flex;
     
     img {

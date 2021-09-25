@@ -14,6 +14,19 @@ const HomeContainerSkeleton = ({ arrival, setting, loadingArrival, loadingSettin
 
   const { bus_station_id, bus_id, subway_station_id } = setting.data;
 
+  // todo: useCallback 으로 함수 최적화 하기
+  const onRefresh = async ({ data: { bus_station_id, bus_id, subway_station_id } }) => {
+    try {
+      await getArrival({
+        bus_station_id,
+        bus_id,
+        subway_station_id,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     const fn = async () => {
       try {
@@ -40,12 +53,16 @@ const HomeContainerSkeleton = ({ arrival, setting, loadingArrival, loadingSettin
     fn();
   }, [bus_station_id, bus_id, subway_station_id]);
 
+
+
   return (
     <>
       <SettingContainer marginY={"2rem"} readOnly={true} />
       <Home arrival={arrival}
+            setting={setting}
             loadingSetting={loadingSetting}
             loadingArrival={loadingArrival}
+            onRefresh={onRefresh}
       />
     </>
   );

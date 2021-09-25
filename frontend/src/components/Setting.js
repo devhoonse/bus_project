@@ -106,7 +106,7 @@ const Setting = ({
     <SettingBlock marginY={marginY}>
       <section>
         {/*<h1>설정 화면</h1>*/}
-        {(loadingSetting || postingSetting || loadingAvailableSubwayStations) && '로딩 중 ...'}
+        {/*{(loadingSetting || postingSetting || loadingAvailableSubwayStations) && '로딩 중 ...'}*/}
         {/*<p>*/}
         {/*  {!(loadingSetting || postingSetting) && setting && (*/}
         {/*    JSON.stringify(setting, null, 2)*/}
@@ -184,7 +184,17 @@ const Setting = ({
           </div>
 
           <div className={"button-container"} style={{ display: readOnly ? "none" : "flex", }}>
-            <button type={"submit"}>저장</button>
+            <button type={"submit"}>
+                {
+                  (loadingSetting || loadingAvailableSubwayStations) && '로딩 중 ...'
+                }
+                {
+                  postingSetting && '저장 중...'
+                }
+                {
+                  !(loadingSetting || loadingAvailableSubwayStations || postingSetting) && '저장'
+                }
+            </button>
           </div>
         </form>
       </section>

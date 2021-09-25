@@ -66,11 +66,14 @@ class Arrival(Resource):
             )
 
             error_location = 'subway'
-            total_duration = duration + 2 + 0
+
+            est_run_time: int
             if realtime:
-                total_duration += int(realtime)
+                est_run_time = int(realtime)
             else:
-                total_duration += expectations[0]
+                est_run_time = expectations[0]
+
+            total_duration = duration + est_run_time + 2 + 0
             est_arrival_time = datetime.datetime.now() + datetime.timedelta(minutes=total_duration)
 
             subway = arrival_sub_time(
@@ -107,6 +110,7 @@ class Arrival(Resource):
                 },
                 'total_duration': total_duration,
                 'estimated_arrival_time': est_arrival_time,
+                'estimated_run_time': est_run_time
             },
         })
 
