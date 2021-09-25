@@ -40,7 +40,7 @@ class Setting(Resource):
             'params': request.args,
             'timestamp': timestamp,
             'data': {
-                'bus_station_id': '218000089',
+                'bus_station_id': '218000542',
                 'bus_id': '241312015',
                 'subway_station_id': '행신역',
                 **session.get('setting', dict())

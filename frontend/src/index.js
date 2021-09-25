@@ -8,6 +8,7 @@ import { createLogger } from 'redux-logger/src';
 import ReduxThunk from 'redux-thunk';
 
 import './index.css';
+import '../src/media/font/font.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import rootReducer from './redux';

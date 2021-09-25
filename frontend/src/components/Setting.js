@@ -33,6 +33,7 @@ const SettingBlock = styled.div`
         border: none;
         padding: 0.5rem;
         font-size: 1rem;
+        font-family: Goyang;
         line-height: 1.5; 
         flex: 1;
         
@@ -71,7 +72,8 @@ const SettingBlock = styled.div`
         // padding-right: 1rem;
         padding-top: 0.5rem;
         padding-bottom: 0.5rem;
-        font-size: 1.5rem;
+        font-size: 2rem;
+        font-family: Goyang;
         display: flex;
         align-items: center;
         justify-content: center;

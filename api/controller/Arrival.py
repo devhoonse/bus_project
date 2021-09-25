@@ -41,7 +41,8 @@ class Arrival(Resource):
         }
         """
 
-        timestamp = datetime.datetime.now()
+        KST = datetime.timezone(datetime.timedelta(hours=9))
+        timestamp = datetime.datetime.now(tz=KST)
 
         # todo: date 파라미터로 기준정보 일자 전달
         try:
@@ -74,7 +75,7 @@ class Arrival(Resource):
                 est_run_time = expectations[0]
 
             total_duration = duration + est_run_time + 2 + 0
-            est_arrival_time = datetime.datetime.now() + datetime.timedelta(minutes=total_duration)
+            est_arrival_time = timestamp + datetime.timedelta(minutes=total_duration)
 
             subway = arrival_sub_time(
                 subway_station_name=request.args.get('subway_station_id'),

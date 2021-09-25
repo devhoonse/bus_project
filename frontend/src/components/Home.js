@@ -39,6 +39,7 @@ const HomeBlock = styled.div`
         border: none;
         padding: 0.5rem;
         font-size: 1rem;
+        font-family: Goyang;
         line-height: 1.5; 
         flex: 1;
         
@@ -62,7 +63,8 @@ const HomeBlock = styled.div`
       max-width: 100%;
       margin-left: auto;
       margin-right: auto;
-      // margin-top: 5rem';
+      margin-top: 2rem;
+      margin-bottom: 2rem;
       border-radius: 5px;
       overflow: hidden;
       
@@ -77,7 +79,8 @@ const HomeBlock = styled.div`
         // padding-right: 1rem;
         padding-top: 0.5rem;
         padding-bottom: 0.5rem;
-        font-size: 1.5rem;
+        font-size: 2rem;
+        font-family: Goyang;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -106,8 +109,27 @@ const Home = ({ loadingArrival, loadingSetting, arrival, setting, onRefresh }) =
         <form onSubmit={event => {event.preventDefault();onRefresh(setting)}}>
           <div className={"button-container"}>
             <button type={"submit"}>
-              {(loadingSetting || loadingArrival) ? '로딩 중 ...' : '새로고침'}
+              {(loadingSetting || loadingArrival) ? '로딩 중 ...' : '조회'}
             </button>
+          </div>
+
+          <div className={"info-container"}>
+            <label htmlFor={"timestamp"}>
+              <img src={inq_time}
+                   alt={"timestamp"}
+              />
+            </label>
+            <input name={"timestamp"}
+                   placeholder={"도착 정보 요청시각"}
+                   value={
+                     !(loadingSetting || loadingArrival) &&
+                     arrival &&
+                     (arrival.timestamp ?
+                         new Date(arrival.timestamp).toLocaleTimeString() :
+                         new Date().toLocaleTimeString())
+                   }
+                   disabled={true}
+            />
           </div>
 
           <div className={"info-container"}>
@@ -179,25 +201,6 @@ const Home = ({ loadingArrival, loadingSetting, arrival, setting, onRefresh }) =
                      arrival &&
                      arrival.data.subway ?
                          arrival.data.subway.downward.join(' , ') : '정보 없음'
-                   }
-                   disabled={true}
-            />
-          </div>
-
-          <div className={"info-container"}>
-            <label htmlFor={"timestamp"}>
-              <img src={inq_time}
-                   alt={"timestamp"}
-              />
-            </label>
-            <input name={"timestamp"}
-                   placeholder={"도착 정보 조회 요청시각"}
-                   value={
-                     !(loadingSetting || loadingArrival) &&
-                     arrival &&
-                     (arrival.timestamp ?
-                         new Date(arrival.timestamp).toLocaleTimeString() :
-                         new Date().toLocaleTimeString())
                    }
                    disabled={true}
             />
