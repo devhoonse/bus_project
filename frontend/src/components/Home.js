@@ -207,7 +207,35 @@ const Home = ({ loadingArrival, loadingSetting, arrival, setting, onRefresh }) =
             />
           </div>
 
-          <div className={"info-container"} style={{ 'margin-top': '2rem', }}>
+          <div className={"subway-arrival"} style={{ 'margin-top': '2rem', 'margin-bottom': '0.5rem', 'color': '#f99'}}>
+            <b>지하철역 도착시간 : </b>
+            <span style={{ 'right': 0, }}>
+                {
+                  !(loadingSetting || loadingArrival) &&
+                  arrival &&
+                  arrival.data.estimated_arrival_time ?
+                      new Date(arrival.data.estimated_arrival_time).toLocaleTimeString() : '정보 없음'
+                }
+              </span>
+          </div>
+
+          {/*<div className={"info-container"} style={{ 'margin-top': '2rem', }}>*/}
+          {/*  <label htmlFor={"subway-arrival"}>*/}
+          {/*    지하철역 도착시간*/}
+          {/*  </label>*/}
+          {/*  <input name={"subway-arrival"}*/}
+          {/*         placeholder={"지하철역 도착 예상 시간"}*/}
+          {/*         value={*/}
+          {/*           !(loadingSetting || loadingArrival) &&*/}
+          {/*           arrival &&*/}
+          {/*           arrival.data.estimated_arrival_time ?*/}
+          {/*               new Date(arrival.data.estimated_arrival_time).toLocaleTimeString() : '정보 없음'*/}
+          {/*         }*/}
+          {/*         disabled={true}*/}
+          {/*  />*/}
+          {/*</div>*/}
+
+          <div className={"info-container"}>
             <label htmlFor={"total-time"}>
               <img src={to_station}
                    alt={"total-time"}
