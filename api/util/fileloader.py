@@ -28,7 +28,7 @@ def arrival_time_history(bus_id: str = '241312015', bus_station_id: str = '21800
     select1 = df.apply(lambda x: datetime.datetime.strptime(x['arrivalTime'], '%Y-%m-%d %H:%M:%S').time() > now_time, axis=1)
     select2 = df.apply(lambda x: str(x['stationId']) == bus_station_id, axis=1)
     df_2 = df[select1 & select2].head(n=2)
-    res = df_2["arrivalTime"].apply(lambda x: (diff_time(now_time, datetime.datetime.strptime(x, '%Y-%m-%d %H:%M:%S').time()).seconds//60) % 60)
+    res = df_2["arrivalTime"].apply(lambda x: (diff_time(now_time, datetime.datetime.strptime(x, '%Y-%m-%d %H:%M:%S').time()).seconds//60))
     res_list = res.to_list()
     return res_list
 
