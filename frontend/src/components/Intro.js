@@ -32,6 +32,7 @@ const Intro = props => {
              bottom: 0,
              maxWidth: '100%',
              opacity: 1,
+             'z-index': 100,
              transition: "opacity 1s , visibility 1s",
            })
          }
