@@ -34,16 +34,18 @@ def arrival_time_history(bus_id: str = '241312015', bus_station_id: str = '21800
 
 
 def run_time_history(bus_id: str = '241312015', bus_station_id: str = '218001146', subway_station_name: str = '행신역'):
-    operand1 = arrival_time_history(bus_id, find_sub_stationId(bus_id, bus_station_id, subway_station_name))[0]
-    operand2 = arrival_time_history(bus_id, bus_station_id)[0]
-    return operand1 - operand2
+    for i in range(5):
+        operand1 = arrival_time_history(bus_id, find_sub_stationId(bus_id, bus_station_id, subway_station_name))[i]
+        operand2 = arrival_time_history(bus_id, bus_station_id)[0]
+        if (operand1 - operand2 > 0): 
+            return operand1 - operand2
 
 
 def arrival_sub_time(subway_station_name: str, est_arrival_time: datetime.datetime):
 
     est_arrival_time = est_arrival_time.time()
     select1 = current_app.subway_schedule["upDownTypeCode"].apply(lambda x: x == "U")
-    select2 = current_app.subway_schedule["subwayStationNm"].apply(lambda x: x == subway_station_name)
+    select2 = current_app.subway_schedule["subwayStationNm"].apply(lambda x: True if re.search(x, subway_station_name) else False)
     select3 = current_app.subway_schedule["depTime"].apply(lambda x: est_arrival_time < datetime.datetime.strptime(x, '%H:%M:%S').time())
     res = {"upward": current_app.subway_schedule[select1 & select2 & select3].head(n=2).apply(lambda x: str(x["depTime"])[:5] + "(" + x["endSubwayStationNm"] + ")", axis=1).to_list(),
            "downward": current_app.subway_schedule[-select1 & select2 & select3].head(n=2).apply(lambda x: str(x["depTime"])[:5] + "(" + x["endSubwayStationNm"] + ")", axis=1).to_list()}
@@ -57,7 +59,7 @@ def find_sub_stationId(bus_id: str, bus_station_id: str, subway_station_name: st
 
     station_ord = route_info[route_info['stationId'].apply(lambda x : str(x) == bus_station_id)]["ord"]
     select1 = route_info["ord"].apply(lambda x: x > int(station_ord))
-    select2 = route_info["stationNm"].apply(lambda x: x == subway_station_name)
+    select2 = route_info["stationNm"].apply(lambda x: True if re.search(x, subway_station_name) else False )
     subway_station_id = str(route_info[select1 & select2]["stationId"].to_list()[0])
     return subway_station_id
 

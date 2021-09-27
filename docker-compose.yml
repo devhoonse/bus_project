@@ -12,6 +12,8 @@ services:
     networks:
     - backend
     privileged: true
+    environment:
+            TZ : "Asia/Seoul"
 
   frontend-dev:
     container_name: frontend-dev
@@ -22,7 +24,9 @@ services:
       - backend
     privileged: true
     stdin_open: true
-
+    environment:
+            TZ : "Asia/Seoul"
+            
   nginx:
     container_name: nginx
     image: "nginx:0.01"
@@ -35,7 +39,9 @@ services:
     networks:
       - backend
     privileged: true
-
+    environment:
+            TZ : "Asia/Seoul"
+            
 networks:
   backend:
     driver: bridge
