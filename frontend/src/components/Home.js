@@ -18,7 +18,15 @@ const HomeBlock = styled.div`
   form {
     // margin-top: 5rem;
     
+    div.text-decorator {
+      margin-left: 1rem; 
+      margin-top: 2rem;
+      margin-bottom: 0.5rem; 
+      color: #f99;
+    }
+    
     div.info-container {
+      position: relative;
       display: flex;
       max-width: 100%;
       margin-left: auto;
@@ -51,6 +59,21 @@ const HomeBlock = styled.div`
         
         &::placeholder {
           color: #dee2e6;
+        }
+      }
+      
+      div.description {
+        position: absolute;
+        right: -20rem;
+        outline: none;
+        border: none;
+        min-width: 30rem;
+        font-size: 0.875rem;
+        
+        span {
+          line-height: 3rem;
+          vertical-align: middle;
+          color: #ccc;
         }
       }
       
@@ -126,11 +149,15 @@ const Home = ({ loadingArrival, loadingSetting, arrival, setting, onRefresh }) =
                      !(loadingSetting || loadingArrival) &&
                      arrival &&
                      (arrival.timestamp ?
-                         new Date(arrival.timestamp).toLocaleTimeString() :
-                         new Date().toLocaleTimeString())
+                         new Date(arrival.timestamp).toLocaleTimeString('ko-KR', {hour12: false}) :
+                         new Date().toLocaleTimeString('ko-KR', {hour12: false}))
                    }
                    disabled={true}
             />
+          </div>
+
+          <div className={"text-decorator"}>
+            <b>버스 도착 정보</b>
           </div>
 
           <div className={"info-container"}>
@@ -146,7 +173,8 @@ const Home = ({ loadingArrival, loadingSetting, arrival, setting, onRefresh }) =
                      arrival &&
                      arrival.data.bus ?
                          arrival.data.bus.realtime ?
-                             `${arrival.data.bus.realtime} 분` : '정보 없음'
+                             `${arrival.data.bus.realtime} 분` :
+                             '정보 없음'
                          : '정보 없음'
                    }
                    disabled={true}
@@ -165,10 +193,18 @@ const Home = ({ loadingArrival, loadingSetting, arrival, setting, onRefresh }) =
                      !(loadingSetting || loadingArrival) &&
                      arrival &&
                      arrival.data.bus ?
-                         `${arrival.data.bus.expectations[0]} 분` : '정보 없음'
+                         `${arrival.data.bus.expectations[0]} 분` :
+                         '정보 없음'
                    }
                    disabled={true}
             />
+            <div className={"description"}>
+              <span>{ "(과거 도착정보 기반)" }</span>
+            </div>
+          </div>
+
+          <div className={"text-decorator"}>
+            <b>지하철 출발 정보</b>
           </div>
 
           <div className={"info-container"}>
@@ -183,7 +219,8 @@ const Home = ({ loadingArrival, loadingSetting, arrival, setting, onRefresh }) =
                      !(loadingSetting || loadingArrival) &&
                      arrival &&
                      arrival.data.subway ?
-                         arrival.data.subway.upward.join(' , ') : '정보 없음'
+                         arrival.data.subway.upward.join(' , ') :
+                         '정보 없음'
                    }
                    disabled={true}
             />
@@ -201,22 +238,23 @@ const Home = ({ loadingArrival, loadingSetting, arrival, setting, onRefresh }) =
                      !(loadingSetting || loadingArrival) &&
                      arrival &&
                      arrival.data.subway ?
-                         arrival.data.subway.downward.join(' , ') : '정보 없음'
+                         arrival.data.subway.downward.join(' , ') :
+                         '정보 없음'
                    }
                    disabled={true}
             />
           </div>
 
-          <div className={"subway-arrival"} style={{ 'margin-left': '1rem', 'margin-top': '2rem', 'margin-bottom': '0.5rem', 'color': '#f99'}}>
+          <div className={"text-decorator"}>
             <b>지하철역 도착시간&nbsp;&nbsp;:&nbsp;&nbsp;</b>
-            <span style={{ 'right': 0, }}>
+            <span className={"sentence"}>
                 {
                   !(loadingSetting || loadingArrival) &&
                   arrival &&
                   arrival.data.estimated_arrival_time ?
-                      new Date(arrival.data.estimated_arrival_time).toLocaleTimeString() : '정보 없음'
+                      new Date(arrival.data.estimated_arrival_time).toLocaleTimeString('ko-KR', {hour12: false}) : '정보 없음'
                 }
-              </span>
+            </span>
           </div>
 
           {/*<div className={"info-container"} style={{ 'margin-top': '2rem', }}>*/}
@@ -247,7 +285,8 @@ const Home = ({ loadingArrival, loadingSetting, arrival, setting, onRefresh }) =
                      !(loadingSetting || loadingArrival) &&
                      arrival &&
                      arrival.data.total_duration ?
-                         `${arrival.data.total_duration} 분` : '정보 없음'
+                         `${arrival.data.total_duration} 분` :
+                         '정보 없음'
                    }
                    disabled={true}
             />
@@ -265,10 +304,16 @@ const Home = ({ loadingArrival, loadingSetting, arrival, setting, onRefresh }) =
                      !(loadingSetting || loadingArrival) &&
                      arrival &&
                      arrival.data.estimated_run_time ?
-                         `${arrival.data.estimated_run_time} 분` : '정보 없음'
+                         `${arrival.data.estimated_run_time} 분` :
+                         '정보 없음'
                    }
                    disabled={true}
             />
+            <div className={"description"}>
+              <span>
+                { "(버스 도착까지 대기시간)" }
+              </span>
+            </div>
           </div>
 
           <div className={"info-container"}>
@@ -282,10 +327,16 @@ const Home = ({ loadingArrival, loadingSetting, arrival, setting, onRefresh }) =
                    value={
                      !(loadingSetting || loadingArrival) &&
                      arrival.data.bus ?
-                         `${arrival.data.bus.duration} 분` : '정보 없음'
+                         `${arrival.data.bus.duration} 분` :
+                         '정보 없음'
                    }
                    disabled={true}
             />
+            <div className={"description"}>
+              <span>
+                { "(지하철역까지 버스 운행시간)" }
+              </span>
+            </div>
           </div>
 
           <div className={"info-container"}>
@@ -301,6 +352,11 @@ const Home = ({ loadingArrival, loadingSetting, arrival, setting, onRefresh }) =
                    }
                    disabled={true}
             />
+            <div className={"description"}>
+              <span>
+                { "(하차 후 지하철까지 도보시간)" }
+              </span>
+            </div>
           </div>
 
           <div className={"info-container"}>
@@ -316,6 +372,11 @@ const Home = ({ loadingArrival, loadingSetting, arrival, setting, onRefresh }) =
                    }
                    disabled={true}
             />
+            <div className={"description"}>
+              <span>
+                { "(횡단보도 대기 시간)" }
+              </span>
+            </div>
           </div>
 
         </form>
