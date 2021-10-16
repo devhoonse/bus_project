@@ -63,12 +63,12 @@ const HomeBlock = styled.div`
       }
       
       div.description {
-        position: absolute;
+        position: sticky;
         right: 1rem;
         outline: none;
         border: none;
-        width: 7rem;
-        font-size: 0.5rem;
+        width: 15rem;
+        font-size: 0.625rem;
         
         span {
           line-height: 3rem;
