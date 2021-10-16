@@ -26,7 +26,7 @@ const HomeBlock = styled.div`
     }
     
     div.info-container {
-      position: relative;
+      // position: relative;
       display: flex;
       max-width: 100%;
       margin-left: auto;
@@ -63,12 +63,12 @@ const HomeBlock = styled.div`
       }
       
       div.description {
-        position: absolute;
-        right: -20rem;
+        // position: absolute;
+        right: 10rem;
         outline: none;
         border: none;
-        min-width: 30rem;
-        font-size: 0.875rem;
+        width: 15rem;
+        font-size: 0.625rem;
         
         span {
           line-height: 3rem;

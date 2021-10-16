@@ -25,20 +25,24 @@ import Intro from "./components/Intro";
 
 
 const GomataTemplate = styled.div`
-  max-width: 100%;
-  max-height: 100%;
+
+  width: 100%;
+  height: 100%;
+  max-width: 500px;
+  max-height: 833px;
+  // overflow-y: auto;
 
   margin-left: auto;
   margin-right: auto;
   // margin-top: 6rem;
   border-radius: 5px;
-  overflow: hidden;
   // background: #5c7cfa;
 
-  ul.navbar {
+  header.navbar {
     // background: #22b8cf;
     // color: white;
     // height: 4rem;
+    // z-index: 100,
     position: sticky;
     top: 0;
     font-size: 1.5rem;
@@ -74,7 +78,7 @@ const App = () => {
     return (
         <GomataTemplate>
           <Intro imgSrc={home_cut} />
-          <ul className={"navbar"}>
+          <header className={"navbar"}>
             <li id={"Home"}>
               <NavLinkButton to={"/"}
                              exact={true}
@@ -97,7 +101,7 @@ const App = () => {
                              hover={setting_hover}
               />
             </li>
-          </ul>
+          </header>
           <div className={"content"}>
             <Route path={"/"} component={HomeContainer} exact={true} />
             <Route path={"/timetable"} component={TimetableContainer} />

@@ -47,6 +47,21 @@ const SettingBlock = styled.div`
         }
       }
       
+      div.description {
+        // position: absolute;
+        // right: -10rem;
+        outline: none;
+        border: none;
+        width: 3rem;
+        font-size: 0.75rem;
+        
+        span {
+          line-height: 3rem;
+          vertical-align: middle;
+          color: #ccc;
+        }
+      }
+      
       & + & {
         margin-top: 5rem;
       }
@@ -137,6 +152,9 @@ const Setting = ({
                 )
               }
             </select>
+            <div className={"description"}>
+              <span>{ "(도착)" }</span>
+            </div>
           </div>
 
           <div className={"input-container"}>
@@ -183,6 +201,9 @@ const Setting = ({
             {/*       value={setting.data.bus_station_id}*/}
             {/*       readOnly={readOnly}*/}
             {/*/>*/}
+            <div className={"description"}>
+              <span>{ "(출발)" }</span>
+            </div>
           </div>
 
           <div className={"button-container"} style={{ display: readOnly ? "none" : "flex", }}>

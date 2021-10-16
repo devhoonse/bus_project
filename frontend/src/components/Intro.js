@@ -29,10 +29,13 @@ const Intro = props => {
              transition: "opacity 1s",
            }) : ({
              position: 'fixed',
-             bottom: 0,
-             maxWidth: '100%',
+             top: 0,
+             width: '100%',
+             maxWidth: '500px',
+             height: '100%',
+             maxHeight: '833px',
              opacity: 1,
-             zIndex: 100,
+             zIndex: 200,
              transition: "opacity 1s , visibility 1s",
            })
          }
