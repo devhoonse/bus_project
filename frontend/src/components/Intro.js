@@ -6,7 +6,7 @@ import ImageFadeIn from "react-image-fade-in";
 
 const IntroBlock = styled.div`
   position: relative;
-  top: 0;
+  bottom: 0;
   width: 100%;
   maxWidth: 500px;
   height: ${props => props.clicked ? '0' : '100%'};
@@ -15,7 +15,7 @@ const IntroBlock = styled.div`
   
   img {
     // position: fixed;
-    // top: 0;
+    bottom: 0;
     width: 100%;
     // maxWidth: 500px;
     height: 100%;
@@ -27,16 +27,17 @@ const IntroBlock = styled.div`
   div.button-container {
     position: absolute;
     width: 100%;
-    max-height: 3rem;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 5px;
     overflow: hidden;
     z-index: 400;
     top: 75%;
     
     button {
-      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      border-radius: 5px;
+      height: 4rem;
+    
+      width: 10rem;
       background: none;
       outline: none;
       border: none;
@@ -76,18 +77,14 @@ const Intro = props => {
 
   return (
     <IntroBlock clicked={clicked}>
-      {
-        !clicked && <>
-          <img src={imgSrc}
-            alt={"Welcome!"}
-          />
-          <div className={"button-container"}>
-            <button onClick={handleClick}>
-              시작하기
-            </button>
-          </div>
-        </>
-      }
+      <img src={imgSrc}
+        alt={"Welcome!"}
+      />
+      <div className={"button-container"}>
+        <button onClick={handleClick}>
+          시작하기
+        </button>
+      </div>
     </IntroBlock>
   );
 };

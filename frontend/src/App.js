@@ -38,6 +38,15 @@ const GomataTemplate = styled.div`
   border-radius: 5px;
   // background: #5c7cfa;
   
+  Intro {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    maxWidth: 500px;
+    height: ${props => props.clicked ? '0' : '100%'};
+    maxHeight: 833px;
+  }
+  
   div.main {
     position: relative;
     top: 0;
@@ -91,7 +100,13 @@ const App = () => {
 
     return (
         <GomataTemplate clicked={clicked}>
-          <Intro imgSrc={home_cut} clicked={clicked} handleClick={handleClick} />
+          {
+            !clicked &&
+            <Intro imgSrc={home_cut}
+                   clicked={clicked}
+                   handleClick={handleClick}
+            />
+          }
           {
             clicked &&
             <div className={"main"}>
