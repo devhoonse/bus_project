@@ -9,6 +9,7 @@ import label_subway_station from "../media/img/subway_station.png";
 
 const SettingBlock = styled.div`
   form {
+    z-index: 1;
     margin-top: ${props => props.marginY || '5rem'};
     
     div.input-container {

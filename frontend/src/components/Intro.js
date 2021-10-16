@@ -1,45 +1,94 @@
 import React, {useCallback, useState} from 'react';
 import {withRouter} from "react-router-dom";
+import styled from "styled-components";
 import ImageFadeIn from "react-image-fade-in";
+
+
+const IntroBlock = styled.div`
+  position: relative;
+  top: 0;
+  width: 100%;
+  maxWidth: 500px;
+  height: ${props => props.clicked ? '0' : '100%'};
+  maxHeight: 833px;
+  // zIndex: 500;
+  
+  img {
+    // position: fixed;
+    // top: 0;
+    width: 100%;
+    // maxWidth: 500px;
+    height: 100%;
+    // maxHeight: 833px;
+    opacity: 1;
+    transition: opacity 1s , visibility 1s;
+  }
+  
+  div.button-container {
+    position: absolute;
+    width: 100%;
+    max-height: 3rem;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+    overflow: hidden;
+    z-index: 400;
+    top: 75%;
+    
+    button {
+      width: 100%;
+      background: none;
+      outline: none;
+      border: none;
+      background: #868e96;
+      color: white;
+      // padding-left: 1rem;
+      // padding-right: 1rem;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+      font-size: 2rem;
+      font-family: Goyang;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: 0.2s background ease-in;
+      
+      &:hover {
+        background: #adb5bd;
+      }
+    }
+  }
+}
+`;
 
 
 const Intro = props => {
 
-  const { imgSrc } = props;
+  const { imgSrc, clicked, handleClick } = props;
   const { match, location } = props;
 
-  const [clicked, setClicked] = useState(false);
-  const handleClick = useCallback(() => {
-    setClicked(!clicked);
-  }, []);
+  // const [clicked, setClicked] = useState(false);
+  // const handleClick = useCallback(() => {
+  //   setClicked(!clicked);
+  // }, []);
 
 
   return (
-    <img src={imgSrc}
-         alt={"Welcome!"}
-         onClick={handleClick}
-         style={
-           clicked ? ({
-             position: 'fixed',
-             bottom: 0,
-             width: 0,
-             height: 0,
-             opacity: 0,
-             visibility: "hidden",
-             transition: "opacity 1s",
-           }) : ({
-             position: 'fixed',
-             top: 0,
-             width: '100%',
-             maxWidth: '500px',
-             height: '100%',
-             maxHeight: '833px',
-             opacity: 1,
-             zIndex: 200,
-             transition: "opacity 1s , visibility 1s",
-           })
-         }
-    />
+    <IntroBlock clicked={clicked}>
+      {
+        !clicked && <>
+          <img src={imgSrc}
+            alt={"Welcome!"}
+          />
+          <div className={"button-container"}>
+            <button onClick={handleClick}>
+              시작하기
+            </button>
+          </div>
+        </>
+      }
+    </IntroBlock>
   );
 };
 

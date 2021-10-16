@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback, useState} from 'react';
 import styled from "styled-components";
 import ImageFadeIn from "react-image-fade-in";
 import {NavLink, Route} from "react-router-dom";
@@ -30,82 +30,98 @@ const GomataTemplate = styled.div`
   height: 100%;
   max-width: 500px;
   max-height: 833px;
-  // overflow-y: auto;
+  overflow-y: auto;
 
   margin-left: auto;
   margin-right: auto;
   // margin-top: 6rem;
   border-radius: 5px;
   // background: #5c7cfa;
-
-  header.navbar {
-    // background: #22b8cf;
-    // color: white;
-    // height: 4rem;
-    // z-index: 100,
-    position: sticky;
+  
+  div.main {
+    position: relative;
     top: 0;
-    font-size: 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    margin: 0;
-    list-style: none;
+    width: 100%;
+    maxWidth: 500px;
+    height: ${props => !props.clicked ? '0' : '100%'};
+    maxHeight: 833px;
     
-    li#Home {
-      width: 33.33%;
+    div.navbar {
+      // background: #22b8cf;
+      // color: white;
+      // height: 4rem;
+      // z-index: 300,
+      position: sticky;
+      top: 0;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      
+      div#Home {
+        width: 33.33%;
+      }
+      div#Timetable {
+        width: 33.33%;
+      }
+      div#Setting {
+        flex: 1;
+      }
     }
-    li#Timetable {
-      width: 33.33%;
-    }
-    li#Setting {
-      flex: 1;
-    }
+  
+    div.content {
+      background: white;
+      top: 0;
+      z-index: 1;
+    }  
   }
-
-  div.content {
-    background: white;
-    top: 0;
-  }
-
 }
 `;
 
 
 const App = () => {
 
+    const [clicked, setClicked] = useState(false);
+    const handleClick = useCallback(() => {
+      setClicked(!clicked);
+    }, []);
+
     return (
-        <GomataTemplate>
-          <Intro imgSrc={home_cut} />
-          <header className={"navbar"}>
-            <li id={"Home"}>
-              <NavLinkButton to={"/"}
-                             exact={true}
-                             active={home_select}
-                             nonactive={home_default}
-                             hover={home_hover}
-              />
-            </li>
-            <li id={"Timetable"}>
-              <NavLinkButton to={"/timetable"}
-                             active={schedule_select}
-                             nonactive={schedule_default}
-                             hover={schedule_hover}
-              />
-            </li>
-            <li id={"Setting"}>
-              <NavLinkButton to={"/setting"}
-                             active={setting_select}
-                             nonactive={setting_default}
-                             hover={setting_hover}
-              />
-            </li>
-          </header>
-          <div className={"content"}>
-            <Route path={"/"} component={HomeContainer} exact={true} />
-            <Route path={"/timetable"} component={TimetableContainer} />
-            <Route path={"/setting"} render={() => <SettingContainer marginY={"2rem"} />} />
+        <GomataTemplate clicked={clicked}>
+          <Intro imgSrc={home_cut} clicked={clicked} handleClick={handleClick} />
+          <div className={"main"}>
+            <div className={"navbar"}>
+              <div id={"Home"}>
+                <NavLinkButton to={"/"}
+                               exact={true}
+                               active={home_select}
+                               nonactive={home_default}
+                               hover={home_hover}
+                />
+              </div>
+              <div id={"Timetable"}>
+                <NavLinkButton to={"/timetable"}
+                               active={schedule_select}
+                               nonactive={schedule_default}
+                               hover={schedule_hover}
+                />
+              </div>
+              <div id={"Setting"}>
+                <NavLinkButton to={"/setting"}
+                               active={setting_select}
+                               nonactive={setting_default}
+                               hover={setting_hover}
+                />
+              </div>
+            </div>
+            <div className={"content"}>
+              <Route path={"/"} component={HomeContainer} exact={true} />
+              <Route path={"/timetable"} component={TimetableContainer} />
+              <Route path={"/setting"} render={() => <SettingContainer marginY={"2rem"} />} />
+            </div>
           </div>
         </GomataTemplate>
     );
