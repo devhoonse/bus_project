@@ -35,8 +35,8 @@ const SettingBlock = styled.div`
         font-size: 1rem;
         font-family: Goyang;
         line-height: 1.5; 
-        width: 180%;
-        // flex: 1.9;
+        width: 100%;
+        flex: 2;
         
         &:disabled {
           -moz-appearance: none;
@@ -53,7 +53,7 @@ const SettingBlock = styled.div`
         right: 3rem;
         outline: none;
         border: none;
-        width: 5rem;
+        // width: 20rem;
         font-size: 0.75rem;
         // flex: 0.2;
         

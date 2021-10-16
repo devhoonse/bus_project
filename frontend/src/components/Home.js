@@ -50,7 +50,8 @@ const HomeBlock = styled.div`
         font-size: 1rem;
         font-family: Goyang;
         line-height: 1.5; 
-        flex: 1;
+        width: 180%;
+        flex: 2;
         
         &:disabled {
           -moz-appearance: none;
@@ -67,8 +68,9 @@ const HomeBlock = styled.div`
         right: 1rem;
         outline: none;
         border: none;
-        width: 15rem;
-        font-size: 0.625rem;
+        // width: 44rem;
+        font-size: 0.5rem;
+        // flex: 1;
         
         span {
           line-height: 3rem;
