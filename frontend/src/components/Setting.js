@@ -35,7 +35,8 @@ const SettingBlock = styled.div`
         font-size: 1rem;
         font-family: Goyang;
         line-height: 1.5; 
-        flex: 1;
+        width: 100%;
+        // flex: 1;
         
         &:disabled {
           -moz-appearance: none;
@@ -48,8 +49,8 @@ const SettingBlock = styled.div`
       }
       
       div.description {
-        // position: absolute;
-        // right: -10rem;
+        position: absolute;
+        right: 1rem;
         outline: none;
         border: none;
         width: 3rem;
