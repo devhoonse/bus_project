@@ -92,37 +92,40 @@ const App = () => {
     return (
         <GomataTemplate clicked={clicked}>
           <Intro imgSrc={home_cut} clicked={clicked} handleClick={handleClick} />
-          <div className={"main"}>
-            <div className={"navbar"}>
-              <div id={"Home"}>
-                <NavLinkButton to={"/"}
-                               exact={true}
-                               active={home_select}
-                               nonactive={home_default}
-                               hover={home_hover}
-                />
+          {
+            clicked &&
+            <div className={"main"}>
+              <div className={"navbar"}>
+                <div id={"Home"}>
+                  <NavLinkButton to={"/"}
+                                 exact={true}
+                                 active={home_select}
+                                 nonactive={home_default}
+                                 hover={home_hover}
+                  />
+                </div>
+                <div id={"Timetable"}>
+                  <NavLinkButton to={"/timetable"}
+                                 active={schedule_select}
+                                 nonactive={schedule_default}
+                                 hover={schedule_hover}
+                  />
+                </div>
+                <div id={"Setting"}>
+                  <NavLinkButton to={"/setting"}
+                                 active={setting_select}
+                                 nonactive={setting_default}
+                                 hover={setting_hover}
+                  />
+                </div>
               </div>
-              <div id={"Timetable"}>
-                <NavLinkButton to={"/timetable"}
-                               active={schedule_select}
-                               nonactive={schedule_default}
-                               hover={schedule_hover}
-                />
-              </div>
-              <div id={"Setting"}>
-                <NavLinkButton to={"/setting"}
-                               active={setting_select}
-                               nonactive={setting_default}
-                               hover={setting_hover}
-                />
+              <div className={"content"}>
+                <Route path={"/"} component={HomeContainer} exact={true} />
+                <Route path={"/timetable"} component={TimetableContainer} />
+                <Route path={"/setting"} render={() => <SettingContainer marginY={"2rem"} />} />
               </div>
             </div>
-            <div className={"content"}>
-              <Route path={"/"} component={HomeContainer} exact={true} />
-              <Route path={"/timetable"} component={TimetableContainer} />
-              <Route path={"/setting"} render={() => <SettingContainer marginY={"2rem"} />} />
-            </div>
-          </div>
+          }
         </GomataTemplate>
     );
 };
