@@ -233,6 +233,23 @@ const Setting = ({
             </button>
           </div>
         </form>
+        <div style={{
+            display: readOnly ? "none" : "visible",
+            marginTop:'4rem',
+            wordBreak:'keep-all',
+            paddingLeft:'1rem',
+            paddingRight:'1rem',
+        }}>
+          <p>안녕하세요. 고마타 기획자 장우영 입니다.</p>
+          <p>고마타(고양시마을버스타요)는 </p>
+          <p>집 앞에서 마을버스 타고 편하게 지하철을 환승할 수 없을까? 라는 생각에서 기획하게 되었습니다.</p>
+          <ul>
+            <li> 마을버스는 왜 정류장 별로 시간표가 없을까?</li>
+            <li> 왜 우리집 마을버스는 맨날 회차대기, 버스정보없음 일까?</li>
+            <li> 지금 마을버스를 타면 몇시 지하철을 탈 수 있을까?</li>
+          </ul>
+          <p>고마타에서 위 3가지 궁금증을 해결해보세요</p>
+        </div>
       </section>
     </SettingBlock>
   );

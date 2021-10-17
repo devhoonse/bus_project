@@ -6,14 +6,51 @@ import styled from "styled-components";
 const TimetableBlock = styled.div`
   section {
     margin-top: 2rem;
-    display: flex;
+    // display: flex;
+    
+    form {
+      div.button-container {
+        display: flex;
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        border-radius: 5px;
+        overflow: hidden;
+        
+        button {
+          width: 100%;
+          background: none;
+          outline: none;
+          border: none;
+          background: #868e96;
+          color: white;
+          // padding-left: 1rem;
+          // padding-right: 1rem;
+          padding-top: 0.5rem;
+          padding-bottom: 0.5rem;
+          font-size: 2rem;
+          font-family: Goyang;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: 0.2s background ease-in;
+          
+          &:hover {
+            background: #adb5bd;
+          }
+        }
+      }    
+    }
     
     img {
       max-width: 100%;
       margin-left: auto;
       margin-right: auto;
       flex: 1;
-    }
+    }    
   }
 `;
 
@@ -22,8 +59,16 @@ const Timetable = ({ loadingSetting, loadingTimetable, timetable }) => {
   return (
     <TimetableBlock>
       <section>
+        <form onSubmit={event => {event.preventDefault();}}>
+          <div className={"button-container"}>
+            <button type={"submit"}>
+              {(loadingSetting || loadingTimetable) ? '로딩 중 ...' : '더 보기'}
+            </button>
+          </div>
+        </form>
+
         {/*<h1>시간표 화면</h1>*/}
-        {(loadingSetting || loadingTimetable) && '로딩 중 ...'}
+        {/*{(loadingSetting || loadingTimetable) && '로딩 중 ...'}*/}
         {/*{!(loadingSetting || loadingTimetable) && timetable && (*/}
         {/*  JSON.stringify(timetable, null, 2)*/}
         {/*)}*/}
