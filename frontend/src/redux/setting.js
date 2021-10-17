@@ -61,7 +61,7 @@ const setting = handleActions(
       }
     ),
     [POST_SETTING_SUCCESS]: (state, {payload: input} ) => {
-      alert('설정 값이 성공적으로 저장되었습니다.');
+      // alert('설정 값이 성공적으로 저장되었습니다.');
       return produce(
         state,
         draft => {
