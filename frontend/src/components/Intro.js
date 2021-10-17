@@ -37,7 +37,7 @@ const IntroBlock = styled.div`
       border-radius: 5px;
       height: 4rem;
     
-      width: 10rem;
+      // width: 10rem;
       background: none;
       outline: none;
       border: none;

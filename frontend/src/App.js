@@ -70,14 +70,17 @@ const GomataTemplate = styled.div`
       margin: 0;
       list-style: none;
       
-      div#Home {
+      div#Setting {
         width: 33.33%;
+        z-index: 1000;
+      }
+      div#Dashboard {
+        width: 33.33%;
+        z-index: 1000;
       }
       div#Timetable {
-        width: 33.33%;
-      }
-      div#Setting {
         flex: 1;
+        z-index: 1000;
       }
     }
   
@@ -111,9 +114,17 @@ const App = () => {
             clicked &&
             <div className={"main"}>
               <div className={"navbar"}>
-                <div id={"Home"}>
+                <div id={"Setting"}>
                   <NavLinkButton to={"/"}
                                  exact={true}
+                                 active={setting_select}
+                                 nonactive={setting_default}
+                                 hover={setting_hover}
+                  />
+                </div>
+                <div id={"Dashboard"}>
+                  <NavLinkButton to={"/dashboard"}
+                                 // exact={true}
                                  active={home_select}
                                  nonactive={home_default}
                                  hover={home_hover}
@@ -126,18 +137,12 @@ const App = () => {
                                  hover={schedule_hover}
                   />
                 </div>
-                <div id={"Setting"}>
-                  <NavLinkButton to={"/setting"}
-                                 active={setting_select}
-                                 nonactive={setting_default}
-                                 hover={setting_hover}
-                  />
-                </div>
+
               </div>
               <div className={"content"}>
-                <Route path={"/"} component={HomeContainer} exact={true} />
+                <Route path={"/"} render={() => <SettingContainer marginY={"2rem"} />} exact={true} />
+                <Route path={"/dashboard"} component={HomeContainer} />
                 <Route path={"/timetable"} component={TimetableContainer} />
-                <Route path={"/setting"} render={() => <SettingContainer marginY={"2rem"} />} />
               </div>
             </div>
           }

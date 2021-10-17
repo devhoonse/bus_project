@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useCallback} from 'react';
+import { withRouter } from 'react-router-dom';
 import styled from "styled-components";
 import DropDown from "react-dropdown";
 
@@ -56,7 +57,7 @@ const SettingBlock = styled.div`
         border: none;
         // width: 20rem;
         font-size: 0.75rem;
-        // flex: 0.2;
+        // flex: 1;
         
         span {
           line-height: 3rem;
@@ -108,6 +109,7 @@ const SettingBlock = styled.div`
 
 
 const Setting = ({
+   history,
    loadingSetting,
    loadingAvailableSubwayStations,
    loadingAvailableBusStations,
@@ -122,6 +124,8 @@ const Setting = ({
    marginY,
    readOnly
 }) => {
+  const goToDashboard = useCallback(() => history.push('/dashboard'), []);
+
   return (
     <SettingBlock marginY={marginY}>
       <section>
@@ -132,7 +136,13 @@ const Setting = ({
         {/*    JSON.stringify(setting, null, 2)*/}
         {/*  )}*/}
         {/*</p>*/}
-        <form onSubmit={event => {event.preventDefault();if (!readOnly) onPostSetting(setting);}}>
+        <form onSubmit={event => {
+          event.preventDefault();
+          if (!readOnly) {
+            onPostSetting(setting);
+            history.push('/dashboard');
+          }
+        }}>
           <div className={"input-container"}>
             <label htmlFor={"subway_station_id"}>
               <img src={label_subway_station} />
@@ -228,4 +238,4 @@ const Setting = ({
   );
 };
 
-export default Setting;
+export default withRouter(Setting);
