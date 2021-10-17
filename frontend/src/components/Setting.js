@@ -228,7 +228,7 @@ const Setting = ({
                   postingSetting && '저장 중...'
                 }
                 {
-                  !(loadingSetting || loadingAvailableSubwayStations || postingSetting) && '저장'
+                  !(loadingSetting || loadingAvailableSubwayStations || postingSetting) && '조회'
                 }
             </button>
           </div>

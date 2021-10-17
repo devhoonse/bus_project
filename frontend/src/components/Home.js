@@ -135,7 +135,7 @@ const Home = ({ loadingArrival, loadingSetting, arrival, setting, onRefresh }) =
         <form onSubmit={event => {event.preventDefault();onRefresh(setting)}}>
           <div className={"button-container"}>
             <button type={"submit"}>
-              {(loadingSetting || loadingArrival) ? '로딩 중 ...' : '조회'}
+              {(loadingSetting || loadingArrival) ? '로딩 중 ...' : '새로고침'}
             </button>
           </div>
 
