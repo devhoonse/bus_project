@@ -11,6 +11,7 @@ const { useEffect } = React;
 
 
 export const SettingContainerSkeleton = ({
+  info,
   setting,
   availableSubwayStations,
   availableBusStations,
@@ -78,7 +79,8 @@ export const SettingContainerSkeleton = ({
   }, [setting]);
 
   return (
-    <Setting setting={setting}
+    <Setting info={info}
+             setting={setting}
              availableSubwayStations={availableSubwayStations}
              availableBusStations={availableBusStations}
              loadingSetting={loadingSetting}
@@ -98,6 +100,7 @@ export const SettingContainerSkeleton = ({
 
 const makeContainer = connect(
   ({ setting, info, loading }) => ({
+    info: info,
     setting: setting,
     availableSubwayStations: info.availableSubwayStations,
     availableBusStations: info.availableBusStations,

@@ -118,6 +118,7 @@ const Setting = ({
    loadingAvailableSubwayStations,
    loadingAvailableBusStations,
    postingSetting,
+   info,
    setting,
    availableSubwayStations,
    availableBusStations,
@@ -154,7 +155,11 @@ const Setting = ({
               readOnly ? (
                 <input name={"subway_station_id"}
                        placeholder={"지하철역 ID"}
-                       value={setting.data.subway_station_id}
+                       value={
+                         info.availableSubwayStations.data.list.filter(
+                           subwayStation => subwayStation.value === setting.data.subway_station_id
+                         )['label']
+                       }
                        disabled={readOnly}
                 />
               ) : (
@@ -222,7 +227,11 @@ const Setting = ({
               readOnly ? (
                 <input name={"bus_station_id"}
                        placeholder={"버스 정류장 ID"}
-                       value={setting.data.bus_station_id}
+                       value={
+                         info.availableBusStations.data.list.filter(
+                           busStation => busStation.value === setting.data.bus_station_id
+                         )['label']
+                       }
                        disabled={readOnly}
                 />
               ) : (
