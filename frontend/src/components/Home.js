@@ -139,24 +139,24 @@ const Home = ({ loadingArrival, loadingSetting, arrival, setting, onRefresh }) =
             </button>
           </div>
 
-          <div className={"info-container"}>
-            <label htmlFor={"timestamp"}>
-              <img src={inq_time}
-                   alt={"timestamp"}
-              />
-            </label>
-            <input name={"timestamp"}
-                   placeholder={"도착 정보 요청시각"}
-                   value={
-                     !(loadingSetting || loadingArrival) &&
-                     arrival &&
-                     (arrival.timestamp ?
-                         new Date(arrival.timestamp).toLocaleTimeString('ko-KR', {hour12: false}) :
-                         new Date().toLocaleTimeString('ko-KR', {hour12: false}))
-                   }
-                   disabled={true}
-            />
-          </div>
+          {/*<div className={"info-container"}>*/}
+          {/*  <label htmlFor={"timestamp"}>*/}
+          {/*    <img src={inq_time}*/}
+          {/*         alt={"timestamp"}*/}
+          {/*    />*/}
+          {/*  </label>*/}
+          {/*  <input name={"timestamp"}*/}
+          {/*         placeholder={"도착 정보 요청시각"}*/}
+          {/*         value={*/}
+          {/*           !(loadingSetting || loadingArrival) &&*/}
+          {/*           arrival &&*/}
+          {/*           (arrival.timestamp ?*/}
+          {/*               new Date(arrival.timestamp).toLocaleTimeString('ko-KR', {hour12: false}) :*/}
+          {/*               new Date().toLocaleTimeString('ko-KR', {hour12: false}))*/}
+          {/*         }*/}
+          {/*         disabled={true}*/}
+          {/*  />*/}
+          {/*</div>*/}
 
           <div className={"text-decorator"}>
             <b>버스 도착 정보</b>
@@ -206,7 +206,7 @@ const Home = ({ loadingArrival, loadingSetting, arrival, setting, onRefresh }) =
           </div>
 
           <div className={"text-decorator"}>
-            <b>지하철 출발 정보</b>
+            <b>탈수있는 지하철 정보</b>
           </div>
 
           <div className={"info-container"}>
@@ -247,7 +247,19 @@ const Home = ({ loadingArrival, loadingSetting, arrival, setting, onRefresh }) =
             />
           </div>
 
-          <div className={"text-decorator"}>
+          <div className={"text-decorator"} style={{color: '#111'}}>
+            <b>현재시간&nbsp;&nbsp;:&nbsp;&nbsp;</b>
+            <span className={"sentence"}>
+                {
+                  !(loadingSetting || loadingArrival) &&
+                     arrival &&
+                     (arrival.timestamp ?
+                         new Date(arrival.timestamp).toLocaleTimeString('ko-KR', {hour12: false}) :
+                         new Date().toLocaleTimeString('ko-KR', {hour12: false}))
+                }
+            </span>
+          </div>
+          <div className={"text-decorator"} style={{color: '#111', marginTop: '0.5rem',}}>
             <b>지하철역 도착시간&nbsp;&nbsp;:&nbsp;&nbsp;</b>
             <span className={"sentence"}>
                 {
