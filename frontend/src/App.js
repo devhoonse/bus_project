@@ -10,7 +10,7 @@ import NavLinkButton from "./components/button/NavLinkButton";
 import HomeContainer from "./containers/HomeContainer";
 import TimetableContainer from "./containers/TimetableContainer";
 import SettingContainer from "./containers/SettingContainer";
-import home from "./media/img/home.png";
+import home from "./media/img/home_211017.png";
 import home_cut from "./media/img/home_cut.png";
 import home_default from "./media/img/home_default.png";
 import home_hover from "./media/img/home_hover.png";
@@ -105,7 +105,7 @@ const App = () => {
         <GomataTemplate clicked={clicked}>
           {
             !clicked &&
-            <Intro imgSrc={home_cut}
+            <Intro imgSrc={home}
                    clicked={clicked}
                    handleClick={handleClick}
             />
