@@ -64,11 +64,11 @@ const HomeBlock = styled.div`
       }
       
       div.description {
-        position: sticky;
+        // position: sticky;
         right: 1rem;
         outline: none;
         border: none;
-        // width: 44rem;
+        width: 10rem;
         font-size: 0.75rem;
         // flex: 1;
         

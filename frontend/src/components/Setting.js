@@ -10,7 +10,6 @@ import label_subway_station from "../media/img/subway_station.png";
 
 const SettingBlock = styled.div`
   form {
-    z-index: 1;
     margin-top: ${props => props.marginY || '5rem'};
     
     div.input-container {
@@ -50,12 +49,17 @@ const SettingBlock = styled.div`
         }
       }
       
+      select {
+        position: relative;
+      }
+      
       div.description {
-        position: sticky;
+        // position: sticky;
         right: 3rem;
         outline: none;
         border: none;
-        // width: 20rem;
+        padding-left: 1rem;
+        width: 3rem;
         font-size: 0.75rem;
         // flex: 1;
         
@@ -124,7 +128,6 @@ const Setting = ({
    marginY,
    readOnly
 }) => {
-  const goToDashboard = useCallback(() => history.push('/dashboard'), []);
 
   return (
     <SettingBlock marginY={marginY}>
@@ -147,24 +150,34 @@ const Setting = ({
             <label htmlFor={"subway_station_id"}>
               <img src={label_subway_station} />
             </label>
-            <select name={"subway_station_id"}
-                    placeholder={"지하철역 ID"}
-                    onChange={onChangeInputSubwayStation}
-                    value={setting.data.subway_station_id}
-                    disabled={readOnly}
-            >
-              {
-                !loadingAvailableSubwayStations && availableSubwayStations.data.list && (
-                  availableSubwayStations.data.list.map(
-                    stationInfo => (
-                      <option key={stationInfo.value} value={stationInfo.value}>
-                        {stationInfo.label}
-                      </option>
+            {
+              readOnly ? (
+                <input name={"subway_station_id"}
+                       placeholder={"지하철역 ID"}
+                       value={setting.data.subway_station_id}
+                       disabled={readOnly}
+                />
+              ) : (
+                <select name={"subway_station_id"}
+                        placeholder={"지하철역 ID"}
+                        onChange={onChangeInputSubwayStation}
+                        value={setting.data.subway_station_id}
+                        disabled={readOnly}
+                >
+                {
+                  !loadingAvailableSubwayStations && availableSubwayStations.data.list && (
+                    availableSubwayStations.data.list.map(
+                      stationInfo => (
+                        <option key={stationInfo.value} value={stationInfo.value}>
+                          {stationInfo.label}
+                        </option>
+                      )
                     )
                   )
-                )
-              }
-            </select>
+                }
+                </select>
+              )
+            }
             <div className={"description"}>
               <span>{ "(도착)" }</span>
             </div>
@@ -174,40 +187,65 @@ const Setting = ({
             <label htmlFor={"bus_id"}>
               <img src={label_bus} />
             </label>
-            <select name={"bus_id"}
-                    placeholder={"버스 ID"}
-                    onChange={onChangeInputBus}
-                    value={setting.data.bus_id}
-                    disabled={true}
-            >
-              <option key={"241312015"} value={"241312015"}>
-                023
-              </option>
-            </select>
+            {
+              readOnly ? (
+                <input name={"bus_id"}
+                       placeholder={"버스 ID"}
+                       value={setting.data.bus_id}
+                       defaultValue={"023"}
+                       disabled={readOnly}
+                >
+                </input>
+              ) : (
+                <select name={"bus_id"}
+                        placeholder={"버스 ID"}
+                        onChange={onChangeInputBus}
+                        value={setting.data.bus_id}
+                        disabled={readOnly}
+                >
+                  <option key={"241312015"} value={"241312015"}>
+                    023
+                  </option>
+                </select>
+              )
+            }
+            <div className={"description"}>
+              <span> </span>
+            </div>
           </div>
 
           <div className={"input-container"}>
             <label htmlFor={"bus_station_id"}>
               <img src={label_bus_station} />
             </label>
-            <select name={"bus_station_id"}
-                    placeholder={"버스 정류장 ID"}
-                    onChange={onChangeInputBusStation}
-                    value={setting.data.bus_station_id}
-                    disabled={readOnly}
-            >
-              {
-                !loadingAvailableBusStations && availableBusStations.data.list && (
-                  availableBusStations.data.list.map(
-                    stationInfo => (
-                      <option key={stationInfo.value} value={stationInfo.value}>
-                        {stationInfo.label}
-                      </option>
+            {
+              readOnly ? (
+                <input name={"bus_station_id"}
+                       placeholder={"버스 정류장 ID"}
+                       value={setting.data.bus_station_id}
+                       disabled={readOnly}
+                />
+              ) : (
+                <select name={"bus_station_id"}
+                        placeholder={"버스 정류장 ID"}
+                        onChange={onChangeInputBusStation}
+                        value={setting.data.bus_station_id}
+                        disabled={readOnly}
+                >
+                {
+                  !loadingAvailableBusStations && availableBusStations.data.list && (
+                    availableBusStations.data.list.map(
+                      stationInfo => (
+                        <option key={stationInfo.value} value={stationInfo.value}>
+                          {stationInfo.label}
+                        </option>
+                      )
                     )
                   )
-                )
-              }
-            </select>
+                }
+                </select>
+              )
+            }
             {/*<input name={"bus_station_id"}*/}
             {/*       placeholder={"버스 정류장 ID"}*/}
             {/*       onChange={onChangeInputBusStation}*/}
@@ -236,6 +274,7 @@ const Setting = ({
         <div style={{
             display: readOnly ? "none" : "visible",
             marginTop:'4rem',
+            marginBottom: '4rem',
             wordBreak:'keep-all',
             paddingLeft:'1rem',
             paddingRight:'1rem',
