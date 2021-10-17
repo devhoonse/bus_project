@@ -40,8 +40,11 @@ const initialState = {
   timestamp: null,
   data: {
     bus_station_id: null,
+    bus_station_nm: null,
     bus_id: null,
+    bus_nm: null,
     subway_station_id: null,
+    subway_station_nm: null,
   },
 };
 
@@ -54,10 +57,14 @@ const setting = handleActions(
         draft.success = input.success;
         draft.timestamp = input.timestamp;
         draft.params.user_id = input.params.user_id;
-        draft.data = input.data;
-        // draft.data.bus_id = input.data.bus_id;
-        // draft.data.bus_station_id = input.data.bus_station_id;
-        // draft.data.subway_station_id = input.data.subway_station_id;
+        // draft.data = input.data;
+        draft.data.bus_id = input.data.bus_id;
+        draft.data.bus_nm = input.data.bus_nm;
+        draft.data.bus_station_id = input.data.bus_station_id;
+        draft.data.bus_station_nm = input.data.bus_station_nm;
+        draft.data.subway_station_id = input.data.subway_station_id;
+        draft.data.subway_station_nm = input.data.subway_station_nm;
+        draft.data.error = input.data.error;
       }
     ),
     [POST_SETTING_SUCCESS]: (state, {payload: input} ) => {
@@ -70,10 +77,13 @@ const setting = handleActions(
           draft.params.bus_id = input.params.bus_id;
           draft.params.bus_station_id = input.params.bus_station_id;
           draft.params.subway_station_id = input.params.subway_station_id;
-          draft.data = input.data;
-          // draft.data.bus_id = input.data.bus_id;
-          // draft.data.bus_station_id = input.data.bus_station_id;
-          // draft.data.subway_station_id = input.data.subway_station_id;
+          // draft.data = input.data;
+          draft.data.bus_id = input.data.bus_id;
+          draft.data.bus_nm = input.data.bus_nm;
+          draft.data.bus_station_id = input.data.bus_station_id;
+          draft.data.bus_station_nm = input.data.bus_station_nm;
+          draft.data.subway_station_id = input.data.subway_station_id;
+          draft.data.subway_station_nm = input.data.subway_station_nm;
         }
       );
     },

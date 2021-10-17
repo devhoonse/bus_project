@@ -11,7 +11,6 @@ const { useEffect } = React;
 
 
 export const SettingContainerSkeleton = ({
-  info,
   setting,
   availableSubwayStations,
   availableBusStations,
@@ -34,11 +33,21 @@ export const SettingContainerSkeleton = ({
 
   const onPostSetting = async setting => {
     try {
+      const subway_station_nm = availableSubwayStations.data.list.filter(
+        subwayStation => subwayStation.value === setting.data.subway_station_id
+      )[0]['label'];
+      const bus_station_nm = availableBusStations.data.list.filter(
+        busStation => busStation.value === setting.data.bus_station_id
+      )[0]['label'];
       await postSetting({
         bus_id: setting.data.bus_id,
+        bus_nm: '023',  // todo: 하드코딩 제거
         bus_station_id: setting.data.bus_station_id,
+        bus_station_nm,
         subway_station_id: setting.data.subway_station_id,
+        subway_station_nm,
       });
+
     } catch (error) {
       console.log(error);
     }
@@ -79,8 +88,7 @@ export const SettingContainerSkeleton = ({
   }, [setting]);
 
   return (
-    <Setting info={info}
-             setting={setting}
+    <Setting setting={setting}
              availableSubwayStations={availableSubwayStations}
              availableBusStations={availableBusStations}
              loadingSetting={loadingSetting}
@@ -100,7 +108,6 @@ export const SettingContainerSkeleton = ({
 
 const makeContainer = connect(
   ({ setting, info, loading }) => ({
-    info: info,
     setting: setting,
     availableSubwayStations: info.availableSubwayStations,
     availableBusStations: info.availableBusStations,

@@ -9,6 +9,7 @@ from flask_restx import Resource, Namespace, fields
 
 # user-defined Modules
 from controller.params import settingQueryParams
+from util.fileloader import find_station_list
 
 
 namespace = Namespace(name='/setting', description="유저 개인 설정 API")
@@ -34,20 +35,56 @@ class Setting(Resource):
         """
 
         timestamp = datetime.datetime.now()
+        success = True
 
-        res = jsonify({
-            'success': True,
-            'params': request.args,
-            'timestamp': timestamp,
-            'data': {
-                'bus_station_id': '218000542',
-                'bus_id': '241312015',
-                'subway_station_id': '행신역',
-                **session.get('setting', dict())
-            },
-        })
+        try:
 
-        return res
+            bus_id = session.get('setting', dict()).get('bus_id', '241312015')
+            bus_station_id = session.get('setting', dict()).get('bus_station_id', '218000542')
+            subway_station_id = session.get('setting', dict()).get('subway_station_id', '행신역')
+
+            subway_stations = [
+                {'label': '행신역', 'value': '행신역'},  #
+                {'label': '화정역', 'value': '화정역'},
+            ]
+            bus_stations = list(filter(
+                lambda obj: obj['value'] == bus_station_id,
+                find_station_list(
+                    bus_id=bus_id,
+                    subway_station_name=subway_station_id,  # todo: 실제 지하철역 ID 로 교체 작업 필요
+                )
+            ))
+
+            bus_station_nm = bus_stations[0]['label'] if bus_stations else 'ERROR'
+            subway_station_nm = list(filter(
+                lambda obj: obj['value'] == subway_station_id,
+                subway_stations
+            ))[0]['label']
+
+            data = {
+                'bus_station_id': bus_station_id,
+                'bus_station_nm': bus_station_nm,
+                'bus_id': bus_id,
+                'bus_nm': '023',
+                'subway_station_id': subway_station_id,
+                'subway_station_nm': subway_station_nm,
+            }
+
+        except (Exception, BaseException) as error:
+            success = False
+            data = {
+                'error': str(error)
+            }
+
+        finally:
+            res = jsonify({
+                'success': success,
+                'params': request.args,
+                'timestamp': timestamp,
+                'data': data,
+            })
+
+            return res
 
     @namespace.expect(namespace.model(
         'SettingModel',
@@ -73,15 +110,53 @@ class Setting(Resource):
         """
 
         timestamp = datetime.datetime.now()
+        success = True
 
-        session['setting'] = request.json
-        session['setting']['bus_id'] = '241312015'
+        try:
 
-        res = jsonify({
-            'success': True,
-            'params': request.json,
-            'timestamp': timestamp,
-            'data': session['setting'],
-        })
+            bus_id = request.json.get('bus_id')
+            bus_station_id = request.json.get('bus_station_id')
+            subway_station_id = request.json.get('subway_station_id')
 
-        return res
+            subway_stations = [
+                {'label': '행신역', 'value': '행신역'},  #
+                {'label': '화정역', 'value': '화정역'},
+            ]
+            bus_stations = find_station_list(
+                bus_id=bus_id,
+                subway_station_name=subway_station_id,  # todo: 실제 지하철역 ID 로 교체 작업 필요
+            )
+
+            bus_station_nm = bus_stations[0]['label'] if bus_stations else 'ERROR'
+            subway_station_nm = list(filter(
+                lambda obj: obj['value'] == subway_station_id,
+                subway_stations
+            ))[0]['label']
+
+            session['setting'] = request.json
+
+            data = {
+                'bus_station_id': bus_station_id,
+                'bus_station_nm': bus_station_nm,
+                'bus_id': bus_id,
+                'bus_nm': '023',
+                'subway_station_id': subway_station_id,
+                'subway_station_nm': subway_station_nm,
+                **session.get('setting', dict())
+            }
+
+        except (Exception, BaseException) as error:
+            success = False
+            data = {
+                'error': str(error)
+            }
+
+        finally:
+            res = jsonify({
+                'success': success,
+                'params': request.json,
+                'timestamp': timestamp,
+                'data': data,
+            })
+
+            return res

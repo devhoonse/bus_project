@@ -67,6 +67,19 @@ const Timetable = ({ loadingSetting, loadingTimetable, timetable }) => {
           </div>
         </form>
 
+        <div style={{
+          paddingTop: '0.5rem',
+          paddingBottom: '1rem',
+          marginLeft: '1.5rem',
+          marginRight: '1.5rem',
+          wordBreak: 'keep-all',
+        }}
+        >
+          <p>
+            * 노선별 정류장별 버스시간표는 과거 평일 도착시간을 기반으로 작성되었습니다. 실제 버스도착 시간과는 차이가 있을 수 있습니다.
+          </p>
+        </div>
+
         {/*<h1>시간표 화면</h1>*/}
         {/*{(loadingSetting || loadingTimetable) && '로딩 중 ...'}*/}
         {/*{!(loadingSetting || loadingTimetable) && timetable && (*/}

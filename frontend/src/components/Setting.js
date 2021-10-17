@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useState} from 'react';
 import { withRouter } from 'react-router-dom';
 import styled from "styled-components";
 import DropDown from "react-dropdown";
@@ -118,7 +118,6 @@ const Setting = ({
    loadingAvailableSubwayStations,
    loadingAvailableBusStations,
    postingSetting,
-   info,
    setting,
    availableSubwayStations,
    availableBusStations,
@@ -133,13 +132,6 @@ const Setting = ({
   return (
     <SettingBlock marginY={marginY}>
       <section>
-        {/*<h1>설정 화면</h1>*/}
-        {/*{(loadingSetting || postingSetting || loadingAvailableSubwayStations) && '로딩 중 ...'}*/}
-        {/*<p>*/}
-        {/*  {!(loadingSetting || postingSetting) && setting && (*/}
-        {/*    JSON.stringify(setting, null, 2)*/}
-        {/*  )}*/}
-        {/*</p>*/}
         <form onSubmit={event => {
           event.preventDefault();
           if (!readOnly) {
@@ -155,11 +147,7 @@ const Setting = ({
               readOnly ? (
                 <input name={"subway_station_id"}
                        placeholder={"지하철역 ID"}
-                       value={
-                         info.availableSubwayStations.data.list.filter(
-                           subwayStation => subwayStation.value === setting.data.subway_station_id
-                         )['label']
-                       }
+                       value={setting.data.subway_station_nm}
                        disabled={readOnly}
                 />
               ) : (
@@ -196,7 +184,7 @@ const Setting = ({
               readOnly ? (
                 <input name={"bus_id"}
                        placeholder={"버스 ID"}
-                       value={setting.data.bus_id}
+                       value={setting.data.bus_nm}
                        defaultValue={"023"}
                        disabled={readOnly}
                 >
@@ -227,11 +215,7 @@ const Setting = ({
               readOnly ? (
                 <input name={"bus_station_id"}
                        placeholder={"버스 정류장 ID"}
-                       value={
-                         info.availableBusStations.data.list.filter(
-                           busStation => busStation.value === setting.data.bus_station_id
-                         )['label']
-                       }
+                       value={setting.data.bus_station_nm}
                        disabled={readOnly}
                 />
               ) : (
