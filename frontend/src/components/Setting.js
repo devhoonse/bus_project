@@ -113,7 +113,6 @@ const SettingBlock = styled.div`
 
 
 const Setting = ({
-   history,
    loadingSetting,
    loadingAvailableSubwayStations,
    loadingAvailableBusStations,
@@ -136,7 +135,6 @@ const Setting = ({
           event.preventDefault();
           if (!readOnly) {
             onPostSetting(setting);
-            history.push('/dashboard');
           }
         }}>
           <div className={"input-container"}>
@@ -287,4 +285,4 @@ const Setting = ({
   );
 };
 
-export default withRouter(Setting);
+export default Setting;
