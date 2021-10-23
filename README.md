@@ -81,6 +81,10 @@
    - ### 서버 종료
      > docker-compose stop api;
    
+## 4) Date colletion 
+ - ### eat
+ - ### at
+ - ### schedule
 
-## 4. Production Deployment `작성 중`
+## 5. Production Deployment `작성 중`
 > docker-compose up -d;
