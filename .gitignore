@@ -1,0 +1,12 @@
+/.idea/vcs.xml
+/api/app.key
+/frontend/node_modules
+/nginx/2020apache_ssl_cert
+/nginx/cert
+/nginx/ssl
+/nginx/container_log
+/nginx/*.crt
+/nginx/*.key
+/devhoonse_gomata_0511.pem
+/gomata_demoserver.ppk
+/github.token
