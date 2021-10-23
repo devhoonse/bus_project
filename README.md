@@ -82,9 +82,10 @@
      > docker-compose stop api;
    
 ## 4) Date colletion 
- - ### 경로 (api/static/data_collection)
- - ### tar -zxvf sample.tar.gz
- - ### data, ref 폴더 생성
+ - ### 샘플 데이터를 사용
+     > cd api/static/data_collection
+     > tar -zxvf sample.tar.gz
+     > data, ref 폴더 생성
 
 ## 5. Production Deployment `작성 중`
 > docker-compose up -d;
