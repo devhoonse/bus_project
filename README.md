@@ -84,7 +84,7 @@
 ## 4) Date colletion 
  - ### 샘플 데이터를 사용
      > cd api/static/data_collection; \
-     > tar -zxvf sample.tar.gz; \
+     > tar -xvf sample.tar.gz; \
      > data, ref 폴더 생성
 
 ## 5. Production Deployment `작성 중`
