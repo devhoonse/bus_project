@@ -13,3 +13,4 @@
 /api/static/data_collection/data
 /api/static/data_collection/ref
 /api/static/data_collection/src
+*.swp
