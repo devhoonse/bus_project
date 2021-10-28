@@ -80,3 +80,36 @@ def find_station_list(bus_id: str, subway_station_name: str):
         }
         res.append(item)
     return res
+
+
+def schedule_d(bus_id, date, bus_station_id):
+    read_path = os.path.join(current_app.project_path, 'data', bus_id, 'at')
+    read_file_path = os.path.join(read_path, f'{date}.txt')
+
+    save_path = os.path.join(current_app.project_path, 'data', bus_id, 'schedule')
+    df = pd.read_csv(read_file_path)
+
+    schedule_d_list = []
+    select1 = df["stationId"].apply(lambda x: str(x) == str(bus_station_id))
+    sub_df = df[select1]
+    hour_list = sub_df["arrivalTime"].apply(lambda x: datetime.datetime.strptime(x, "%Y-%m-%d %H:%M:%S").time().hour).to_list()
+    minute_list = sub_df["arrivalTime"].apply(lambda x: datetime.datetime.strptime(x, "%Y-%m-%d %H:%M:%S").time().minute).to_list()
+
+    for i in range(len(hour_list)):
+        hour = hour_list[i]
+        minute = minute_list[i]
+        res_hm = {"h": hour, 'm': minute}
+        schedule_d_list.append(res_hm)
+
+    return schedule_d_list
+
+
+def arrival_time_gmt(schedule_detail, now_a):
+    df_res = pd.DataFrame(schedule_detail)
+    h = now_a.hour
+    m = now_a.minute
+    s1 = df_res.apply(lambda x: int(x['h']) >= h, axis=1)
+    s2 = df_res.apply(lambda x: int(x['h']) >= h and int(x['m'] > m) or int(x['h']) > 7, axis=1)
+    res_list = df_res[s1 & s2][:2].apply(lambda x: str(x["h"]) + ":" + str(x['m']), axis=1).to_list()
+    return res_list
+

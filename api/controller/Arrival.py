@@ -9,7 +9,7 @@ from flask_restx import Resource, Namespace
 
 # user-defined Modules
 from controller.params import busArrivalQueryParams
-from util.fileloader import arrival_time_history, run_time_history, arrival_sub_time
+from util.fileloader import arrival_time_history, run_time_history, arrival_sub_time, schedule_d, arrival_time_gmt
 from util.openapi import get_arrival_info
 
 
@@ -66,6 +66,14 @@ class Arrival(Resource):
                 subway_station_name=request.args.get('subway_station_id'),  # todo: 실제 id 로 교체작업 필요
             )
 
+            error_location = 'station'
+            schedule_detail = schedule_d(
+                bus_id=request.args.get('bus_id'),
+                date='20210802',  # fixme: 하드코딩 제거 timestamp.strftime('%Y%m%d')
+                bus_station_id=request.args.get('bus_station_id'),
+            )
+            arrival_gmt = arrival_time_gmt(schedule_detail=schedule_detail, now_a=timestamp)
+
             error_location = 'subway'
 
             est_run_time: int
@@ -100,7 +108,11 @@ class Arrival(Resource):
             'timestamp': timestamp,
             'data': {
                 'bus': {
-                    'expectations': expectations,
+                    'expectations': {
+                        'value': expectations,
+                        'firstArrivalTime': arrival_gmt[0],     # todo: 2021-10-28 추가
+                        'nextArrivalTime': arrival_gmt[1]       # todo: 2021-10-28 추가
+                    },
                     'realtimes': realtimes,
                     'realtime': realtime,
                     'duration': duration,
@@ -108,6 +120,9 @@ class Arrival(Resource):
                 'subway': {
                     'upward': subway['upward'],
                     'downward': subway['downward'],
+                },
+                'station': {
+                    'scheduleDetail': schedule_detail,        # todo: 2021-10-28 추가
                 },
                 'total_duration': total_duration,
                 'estimated_arrival_time': est_arrival_time,
