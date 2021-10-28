@@ -7,7 +7,8 @@ services:
     ports:
      - "7077:7070"
     volumes:
-      - ./api/static/data_collection:/home/gomata/src/api/static/data_collection
+      - /home/ubuntu/src/data_collection:/home/gomata/src/api/static/data_collection
+#      - ./api/static/data_collection:/home/gomata/src/api/static/data_collection
 #      - /home/ubuntu/src/data_collection:/home/gomata/src/api/static
     networks:
     - backend
