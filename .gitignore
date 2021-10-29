@@ -14,3 +14,4 @@
 /api/static/data_collection/ref
 /api/static/data_collection/src
 *.swp
+.DS_Store
