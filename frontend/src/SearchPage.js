@@ -54,7 +54,8 @@ function SearchPage(props) {
                     *23번 마을버스 경로만 제공됩니다.
                 </span>
                 <select required onChange={(e) => {
-                    setSelectedBus(e.target.value);
+                    console.log(e.target.options);
+                    setSelectedBus({ id: e.target.value, name: e.target.options[e.target.options.selectedIndex].label});
                 }}>
                     <option value="" disabled selected hidden>출발할 버스 정류장을 선택하세요</option>
                     {buses.map(d => (
@@ -70,7 +71,7 @@ function SearchPage(props) {
                     환승 지하철역
                 </span>
                 <select required onChange={(e) => {
-                    setSelectedSub(e.target.value);
+                    setSelectedSub({ id: e.target.value, name: e.target.value });
                 }}>
                     <option value="" disabled selected hidden>환승할 지하철역을 선택하세요</option>
                     {subways.map(d => (
