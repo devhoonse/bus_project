@@ -23,14 +23,29 @@ function SearchPage(props) {
         // TODO: Position data is not yet used in the API (https://github.com/devhoonse/bus_project/blob/fe955ee953fa07186311595cc0c47101286d6a50/api/controller/Info.py#L46)
         infoApi.getAvailableSubwayStations({longitude: 0, latitude: 0}).then(data => {
             setSubways(data.data.data.list);
-            setIsLoading(false);
         });
 
         // We have only one bus
         infoApi.getAvailableBusStations({ bus_id: 241312015, subway_station_id: '행신역' }).then(data => {
             setBuses(data.data.data.list);
+            setIsLoading(false);
         });
     }, []);
+
+    useEffect(() => {
+        if(!selectedSub) {
+            // We do not have sufficient data
+            return;
+        }
+
+        setIsLoading(true);
+        
+        // We have only one bus
+        infoApi.getAvailableBusStations({ bus_id: 241312015, subway_station_id: selectedSub.id }).then(data => {
+            setBuses(data.data.data.list);
+            setIsLoading(false);
+        });
+    }, [selectedSub]);
 
     return (
         <div className='search-page'>

@@ -4,6 +4,8 @@ import * as api from './lib/api/arrival.js';
 
 import arrowL from './media/img/arrow-l.png';
 import illust from './media/img/search_result_page_illust.svg';
+import busIcon from './media/img/bus_icon.png';
+import transferIcon from './media/img/transfer.png';
 
 function SearchResultPage(props) {
     const {
@@ -13,7 +15,6 @@ function SearchResultPage(props) {
         onHide
     } = props;
 
-    const [isLoading, setIsLoading] = useState(false);
     const [runTime, setRunTime] = useState();
     const [departTime, setDepartTime] = useState();
     const [arriveTime, setArriveTime] = useState();
@@ -24,12 +25,22 @@ function SearchResultPage(props) {
     const [departTimeMinusWalk, setDepartTimeMinusWalk] = useState();
     const [subwayDetailUpward, setSubwayDetailUpward] = useState();
     const [subwayDetailDownward, setSubwayDetailDownward] = useState();
-    const [selectedSubway, setSelectedSubway] = useState(undefined);
-    const [selectedBus, setSelectedBus] = useState(undefined);
 
     useEffect(() => {
-        setIsLoading(true);
-        
+        // Reset data when hiding
+        setRunTime();
+        setDepartTime();
+        setArriveTime();
+        setNaverTime();
+        setGoyangTime();
+        setNextBusArriveTime();
+        setNaverBusArriveTime();
+        setDepartTimeMinusWalk();
+        setSubwayDetailUpward();
+        setSubwayDetailDownward();
+    }, [hide]);
+
+    useEffect(() => {
         const timeStr = (str, plusMin) => {
             return plusMin ? 
                 new Date((new Date(str)).getTime() + +plusMin * 60000).toLocaleTimeString('ko-KR', { hour12: false, hour: '2-digit', minute: '2-digit' })
@@ -56,7 +67,6 @@ function SearchResultPage(props) {
             setDepartTimeMinusWalk(timeStr(data.data.data.estimated_arrival_time, "-2"));
             setSubwayDetailUpward(data.data.data.subway.upward.join(', '));
             setSubwayDetailDownward(data.data.data.subway.downward.join(', '));
-            setIsLoading(false);
         });
     }, [bus, sub]);
 
@@ -76,42 +86,60 @@ function SearchResultPage(props) {
                 <img className='search-result-page-illustration' src={illust} alt='Illustration'/> 
             </div>
             <div className='search-result-page-detail'>
-                <div className='search-result-page-detail-section'>
+                <div className='search-result-page-detail-section' style={{ paddingTop: '34px' }}>
                     <div>
                         <span className='search-result-page-detail-title'>출발</span>
-                        <span className='search-result-page-detail-time'>{departTime ?? '00:00'}</span>
+                        <span className='search-result-page-detail-time'>{departTime ?? ''}</span>
                     </div>
                     <div className='search-result-page-detail-subtitle'>{bus.name}</div>
+                    <div className='search-result-page-detail-gap'/>
                     <div>
-                        <div className='search-result-page-detail-subtitle'>{naverTime ? `${naverTime}분 후 도착` : '정보 없음'}</div>
+                        <img className='search-result-page-detail-icon' src={busIcon} alt='Bus Icon'/>
+                        <span className='search-result-page-detail-subtitle' style={{ marginLeft: '181px' }}>{naverTime ? `${naverTime}분 후 도착` : '정보 없음'}</span>
                         <span className='search-result-page-detail-time-hl'>{naverBusArriveTime ?? ''}</span>
                     </div>
-                    <div className='search-result-page-detail-subsubtitle'>네이버 실시간 정보 기반</div>
-                    <span className='search-result-page-detail-subtitle'>{goyangTime ? `또는 ${goyangTime}분 후 도착` : '정보 없음'}</span>
-                    <div className='search-result-page-detail-subsubtitle'>고양시 데이터 기반</div>
+                    <div className='search-result-page-detail-subsubtitle' style={{ marginLeft: '181px' }}>네이버 실시간 정보 기반</div>
+                    <span className='search-result-page-detail-subtitle' style={{ marginLeft: '181px' }}>{goyangTime ? `또는 ${goyangTime}분 후 도착` : '정보 없음'}</span>
+                    <div className='search-result-page-detail-subsubtitle' style={{ marginLeft: '181px' }}>고양시 데이터 기반</div>
+                    <div className='search-result-page-detail-gap'/>
                     <div>
                         <span className='search-result-page-detail-subtitle'>{'다음 도착 예정 시간'}</span>
                         <span className='search-result-page-detail-time'>{nextBusArriveTime ?? ''}</span>
                     </div>
                     <div className='search-result-page-detail-link'>{'버스시간표 전체 보기'}</div>
                 </div>
+                <div className='search-result-page-detail-gap-lg' style={{ height: '30px' }}/>
                 <div className='search-result-page-detail-section'>
                     <div>
                         <span className='search-result-page-detail-title'>{`${sub.name} 하차`}</span>
                         <span className='search-result-page-detail-time'>{departTimeMinusWalk ?? ''}</span>
                     </div>
-                    <div className='search-result-page-detail-subtitle'>{'도보 2분'}</div>
+                    <div className='search-result-page-detail-gap-lg'/>
+                    <img className='search-result-page-detail-icon' src={transferIcon} alt='Transfer Icon'/>
+                    <div className='search-result-page-detail-subtitle' style={{ marginLeft: '122px' }}>{'도보 2분'}</div>
                 </div>
+                <div className='search-result-page-detail-gap-lg'/>
                 <div className='search-result-page-detail-section'>
                     <div>
                         <span className='search-result-page-detail-title'>도착</span>
                         <span className='search-result-page-detail-subtitle'>{`${sub.name} 승강장`}</span>
                         <span className='search-result-page-detail-time'>{arriveTime ?? ''}</span>
                     </div>
+                    <div className='search-result-page-detail-gap-lg'/>
                     <div className='search-result-page-detail-subtitle'>{'지하철 도착 예정 시간'}</div>
                     <div className='search-result-page-detail-subtitle'>{subwayDetailUpward ? `상행 ${subwayDetailUpward}` : ''}</div>
                     <div className='search-result-page-detail-subtitle'>{subwayDetailDownward ? `하행 ${subwayDetailDownward}` : ''}</div>
                 </div>
+                {/* Left Timeline Icons */}
+                <span className='icon vl'/>
+                <span className='icon t-o'/>
+                <span className='icon t-i'/>
+                <span className='icon b'/>
+                <span className='icon dot3-1'/>
+                <span className='icon dot3-2'/>
+                <span className='icon dot3-3'/>
+                <span className='icon b-o'/>
+                <span className='icon b-i'/>
             </div>
         </div>
     );
