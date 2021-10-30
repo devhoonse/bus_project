@@ -21,8 +21,8 @@ def configure_app_context(app):
     with app.app_context():
 
         # 프로젝트 경로 정보 등록 (도커 컨테이너 내 디렉토리 위치 -> 호스트 인스턴스의 data_collect 디렉토리에 연결됨)
-        # current_app.project_path = "static/data_collection"
-        current_app.project_path = "/home/gomata/src/api/static/data_collection"
+        current_app.project_path = "static/data_collection"
+        # current_app.project_path = "/home/gomata/src/api/static/data_collection"
 
         # 지하철역 스케줄 데이터 등록
         current_app.subway_schedule = pd.read_csv(
