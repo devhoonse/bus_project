@@ -22,12 +22,12 @@ function SearchPage(props) {
     useEffect(() => {
         setIsLoading(true);
         
-        // TODO: Position data is not yet used in the API (https://github.com/devhoonse/bus_project/blob/fe955ee953fa07186311595cc0c47101286d6a50/api/controller/Info.py#L46)
+        // TODO: Position data is not yet used in the API (https://github.com/devhoonse/bus_project/blob/fe955ee953fa07186311595cc0c47101286d6a50/api/controller/Info.py#L46) --> next year
         infoApi.getAvailableSubwayStations({longitude: 0, latitude: 0}).then(data => {
             setSubways(data.data.data.list);
         });
 
-        // We have only one bus
+        // We have only one bus and subway_station 
         infoApi.getAvailableBusStations({ bus_id: 241312015, subway_station_id: '행신역' }).then(data => {
             setBuses(data.data.data.list);
             setIsLoading(false);
@@ -67,8 +67,8 @@ function SearchPage(props) {
                 <span className='search-page-dropdown-subtitle'>
                     버스정류장
                 </span>
-                <span className='search-page-dropdown-desc'>
-                    *23번 마을버스 경로만 제공됩니다.
+                <span className='search-page-dropdown-desc'> 
+                    *023번 마을버스 경로만 제공됩니다. 
                 </span>
                 <select required onChange={(e) => {
                     console.log(e.target.options);
