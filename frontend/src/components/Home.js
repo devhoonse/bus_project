@@ -195,7 +195,7 @@ const Home = ({ loadingArrival, loadingSetting, arrival, setting, onRefresh }) =
                      !(loadingSetting || loadingArrival) &&
                      arrival &&
                      arrival.data.bus ?
-                         `${arrival.data.bus.expectations[0]} 분` :
+                         `${arrival.data.bus.expectations.value[0]} 분` :
                          '정보 없음'
                    }
                    disabled={true}

@@ -109,7 +109,7 @@ class Arrival(Resource):
             'data': {
                 'bus': {
                     'expectations': {
-                        'value': expectations,
+                        'value': expectations, 
                         'firstArrivalTime': arrival_gmt[0],     # todo: 2021-10-28 추가
                         'nextArrivalTime': arrival_gmt[1]       # todo: 2021-10-28 추가
                     },
