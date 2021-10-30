@@ -16,8 +16,8 @@ function SearchPage(props) {
     const [isLoading, setIsLoading] = useState(false);
     const [subways, setSubways] = useState([]);
     const [buses, setBuses] = useState([]);
-    const [selectedSub, setSelectedSub] = useState(undefined);
-    const [selectedBus, setSelectedBus] = useState(undefined);
+    const [selectedSub, setSelectedSub] = useState({ id: '행신역', name: '행신역' });
+    const [selectedBus, setSelectedBus] = useState({ id: 218000542, name: '샘터마을1단지.무원고등학교' });
 
     useEffect(() => {
         setIsLoading(true);
@@ -74,7 +74,7 @@ function SearchPage(props) {
                     console.log(e.target.options);
                     setSelectedBus({ id: e.target.value, name: e.target.options[e.target.options.selectedIndex].label});
                 }}>
-                    <option value="" disabled selected hidden>출발할 버스 정류장을 선택하세요</option>
+                    {/* <option value="" disabled selected hidden>출발할 버스 정류장을 선택하세요</option> */}
                     {buses.map(d => (
                         <option key={d.label} value={d.value}>{d.label}</option>
                     ))}
@@ -87,10 +87,10 @@ function SearchPage(props) {
                 <span className='search-page-dropdown-subtitle'>
                     환승 지하철역
                 </span>
-                <select required onChange={(e) => {
+                <select required disabled onChange={(e) => {
                     setSelectedSub({ id: e.target.value, name: e.target.value });
                 }}>
-                    <option value="" disabled selected hidden>환승할 지하철역을 선택하세요</option>
+                    {/* <option value="" disabled selected hidden>환승할 지하철역을 선택하세요</option> */}
                     {subways.map(d => (
                         <option key={d.value} value={d.value}>{d.label}</option>
                     ))}

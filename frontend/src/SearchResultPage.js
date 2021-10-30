@@ -16,6 +16,8 @@ function SearchResultPage(props) {
         onSchedule,
     } = props;
 
+    const [isLoading, setIsLoading] = useState(false);
+    const [isSuccess, setIsSuccess] = useState(false);
     const [runTime, setRunTime] = useState();
     const [departTime, setDepartTime] = useState();
     const [arriveTime, setArriveTime] = useState();
@@ -29,6 +31,8 @@ function SearchResultPage(props) {
 
     useEffect(() => {
         // Reset data when hiding
+        setIsLoading(false);
+        setIsSuccess(false);
         setRunTime();
         setDepartTime();
         setArriveTime();
@@ -42,6 +46,7 @@ function SearchResultPage(props) {
     }, [hide]);
 
     useEffect(() => {
+        setIsLoading(true);
         const timeStr = (str, plusMin) => {
             return plusMin ? 
                 new Date((new Date(str)).getTime() + +plusMin * 60000).toLocaleTimeString('ko-KR', { hour12: false, hour: '2-digit', minute: '2-digit' })
@@ -49,6 +54,8 @@ function SearchResultPage(props) {
         };
 
         api.getArrival({ bus_id: 241312015, bus_station_id: bus.id, subway_station_id: sub.id }).then(data => {
+            setIsLoading(false);
+
             if(!data.data.data.estimated_run_time || !data.data.data.estimated_arrival_time) {
                 // data not prepared yet
                 return;
@@ -68,6 +75,8 @@ function SearchResultPage(props) {
             setDepartTimeMinusWalk(timeStr(data.data.data.estimated_arrival_time, "-2"));
             setSubwayDetailUpward(data.data.data.subway.upward.join(', '));
             setSubwayDetailDownward(data.data.data.subway.downward.join(', '));
+        
+            setIsSuccess(true);
         });
     }, [bus, sub]);
 
@@ -79,7 +88,7 @@ function SearchResultPage(props) {
                     {`${sub.name}까지`}
                 </div>
                 <div className='search-result-page-overview-min'>
-                    {runTime ? `${runTime}분` : '조회중...'}
+                    {runTime ? `${runTime}분` : isLoading ? '조회중...' : !isSuccess ? '정보 없음' : ''}
                 </div>
                 <div className='search-result-page-overview-time'>
                     {`출발 ${departTime ?? '00:00'} - 도착 ${arriveTime ?? '00:00'}`}
