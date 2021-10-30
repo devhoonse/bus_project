@@ -10,7 +10,8 @@ import illust from './media/img/search_page_illust.svg';
 function SearchPage(props) {
     const {
         onSearch,
-        onInfo
+        onInfo,
+        onSchedule
     } = props;
 
     const [isLoading, setIsLoading] = useState(false);
@@ -80,6 +81,7 @@ function SearchPage(props) {
                     ))}
                 </select>
             </div>
+            <div className='search-result-page-detail-link' style={{ marginLeft: '20px', marginTop: '10px' }} onClick={() => onSchedule()}>{'버스시간표 전체 보기'}</div>
             <div className='search-page-dropdown'>
                 <span className='search-page-dropdown-title'>
                     도착 
