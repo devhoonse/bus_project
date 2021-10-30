@@ -25,6 +25,8 @@ import Intro from "./components/Intro";
 
 import SearchPage from "./SearchPage.js";
 import SearchResultPage from "./SearchResultPage.js";
+import InfoPage from "./InfoPage.js";
+import SchedulePage from "./SchedulePage.js";
 import './App.css';
 
 const DEBUG_MODE = false;
@@ -32,22 +34,40 @@ const DEBUG_MODE = false;
 const App = () => {
 
     const [showSearchResult, setShowSearchResult] = useState(DEBUG_MODE);
+    const [showInfoPage, setShowInfoPage] = useState(DEBUG_MODE);
+    const [showSchedule, setShowSchedule] = useState(DEBUG_MODE);
 
     const [selectedBus, setSelectedBus] = useState('');
     const [selectedSub, setSelectedSub] = useState('');
+    const [schedule, setSchedule] = useState([]);
 
     return (
         <>
-            <SearchPage onSearch={props => { 
-                setSelectedBus(props.selectedBus);
-                setSelectedSub(props.selectedSub);
-                setShowSearchResult(true); 
-            }}/>
+            <SearchPage 
+                onSearch={props => { 
+                    setSelectedBus(props.selectedBus);
+                    setSelectedSub(props.selectedSub);
+                    setShowSearchResult(true); 
+                }}
+                onInfo={() => setShowInfoPage(true)}
+            />
+            <InfoPage
+                hide={!showInfoPage}
+                onHide={() => setShowInfoPage(false)}
+            />
             <SearchResultPage 
                 bus={selectedBus}
                 sub={selectedSub}
                 hide={!showSearchResult}
                 onHide={() => setShowSearchResult(false)}
+                onSchedule={() => setShowSchedule(true)}
+                setSchedule={(props) => setSchedule(props)}
+            />
+            <SchedulePage
+                bus={selectedBus}
+                sub={selectedSub}
+                hide={!showSchedule}
+                onHide={() => setShowSchedule(false)}
             />
         </>
     );

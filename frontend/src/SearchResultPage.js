@@ -12,7 +12,8 @@ function SearchResultPage(props) {
         bus,
         sub,
         hide,
-        onHide
+        onHide,
+        onSchedule,
     } = props;
 
     const [runTime, setRunTime] = useState();
@@ -53,7 +54,7 @@ function SearchResultPage(props) {
                 return;
             }
 
-            console.log(data.data);
+            // console.log(data.data);
 
             setRunTime(data.data.data.estimated_run_time);
             setDepartTime(timeStr(data.data.timestamp));
@@ -104,9 +105,9 @@ function SearchResultPage(props) {
                     <div className='search-result-page-detail-gap'/>
                     <div>
                         <span className='search-result-page-detail-subtitle'>{'다음 도착 예정 시간'}</span>
-                        <span className='search-result-page-detail-time'>{nextBusArriveTime ?? ''}</span>
+                        <span className='search-result-page-detail-time' style={{ position: 'inherit', marginLeft: '4px' }}>{nextBusArriveTime ?? ''}</span>
                     </div>
-                    <div className='search-result-page-detail-link'>{'버스시간표 전체 보기'}</div>
+                    <div className='search-result-page-detail-link' onClick={() => onSchedule()}>{'버스시간표 전체 보기'}</div>
                 </div>
                 <div className='search-result-page-detail-gap-lg' style={{ height: '30px' }}/>
                 <div className='search-result-page-detail-section'>

@@ -4,11 +4,13 @@ import * as infoApi from './lib/api/info.js';
 
 import background from './media/img/background.png';
 import logo from './media/img/logo.png';
+import info from './media/img/info_icon.png';
 import illust from './media/img/search_page_illust.svg';
 
 function SearchPage(props) {
     const {
-        onSearch
+        onSearch,
+        onInfo
     } = props;
 
     const [isLoading, setIsLoading] = useState(false);
@@ -48,11 +50,11 @@ function SearchPage(props) {
     }, [selectedSub]);
 
     return (
-        <div className='search-page'>
-            <div className='search-page-bg' style={{ backgroundImage: `url(${background})` }}/>
+        <div className='search-page' style={{ backgroundImage: `url(${background})` }}>
             <div className='search-page-navbar'>
                 <img className='search-page-logo' src={logo} alt='logo'/>
                 고양시 마을버스 타요
+                <img className='search-page-info' src={info} alt='info' onClick={() => {onInfo()}}/>
             </div>
             <img className='search-page-illustration' src={illust} alt='Illustration'/> 
             <div className='search-page-question'>
