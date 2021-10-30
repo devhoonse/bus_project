@@ -70,8 +70,8 @@ function SearchPage(props) {
                 <span className='search-page-dropdown-desc'> 
                     *023번 마을버스 경로만 제공됩니다. 
                 </span>
-                <select required onChange={(e) => {
-                    console.log(e.target.options);
+                <select required value={selectedBus.id} onChange={(e) => {
+                    // console.log(e.target.options);
                     setSelectedBus({ id: e.target.value, name: e.target.options[e.target.options.selectedIndex].label});
                 }}>
                     {/* <option value="" disabled selected hidden>출발할 버스 정류장을 선택하세요</option> */}
