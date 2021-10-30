@@ -19,14 +19,22 @@ services:
   frontend-dev:
     container_name: frontend-dev
     image: "frontend-dev:0.01"
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile-dev
     ports:
       - "3030:3000"
     networks:
       - backend
     privileged: true
     stdin_open: true
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
     environment:
-            TZ : "Asia/Seoul"
+           - TZ="Asia/Seoul"
+           - CHOKIDAR_USEPOLLING=true
+    command: yarn start
             
   nginx:
     container_name: nginx

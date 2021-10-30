@@ -1,7 +1,339 @@
 .App {
   text-align: center;
+  width: 100%;
+  height: 100%;
 }
 
+/**
+ * Search Page
+ */
+.search-page {
+    position: absolute;
+    width: 100%;
+    min-height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover; /* contain */
+}
+
+.search-page-navbar {
+    font-family: Noto Sans KR;
+    font-size: 20px;
+    font-weight: 100;
+    padding-top: 20px;
+    padding-left: 20px;
+    letter-spacing: 0.25px;
+}
+
+.search-page-logo {
+    width: 30px;
+    height: 30px;
+    margin-top: -3px;
+    margin-right: 4px;
+    vertical-align: middle;
+}
+
+.search-page-info {
+    width: 30px;
+    height: 30px;
+    margin-top: -3px;
+    vertical-align: middle;
+    position: absolute;
+    right: 20px;
+}
+
+.search-page-illustration {
+    margin-top: 29.5px;
+    margin-left: 20.9px;
+    width: calc(100% - 40px);
+}
+
+.search-page-question {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 30px; 
+    font-weight: 600;
+    font-size: 20px;
+    word-break: keep-all;
+}
+
+.search-page-dropdown {
+    margin-top: 29px;
+    margin-left: 20px;
+    margin-right: 20px;
+    font-size: 14px;
+}
+
+.search-page-dropdown-title {
+    font-weight: bold;
+}
+
+.search-page-dropdown-subtitle {
+    margin-left: 6px;
+}
+
+.search-page-dropdown-desc {
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.4);
+    right: 20px;
+    position: absolute;
+}
+
+.search-page-dropdown > select {
+    margin-top: 10px;
+    border: none;
+    border-bottom: 1px solid black;
+    -webkit-appearance: none;
+    width: 100%;
+    height: 24px;
+    background: none;
+    font-size: 16px;
+}
+
+.search-page-dropdown select:invalid {
+    color: rgba(0, 0, 0, 0.4);
+}
+
+.search-page-dropdown select:after {
+    content: "\25bc";
+    right: 14px;
+    font-size: 10px;
+    position: relative;
+    top: -1px;
+    color: #878787;
+}
+
+.search-page-button,
+.search-page-button-disabled {
+    border-radius: 22px;
+    background-color: #FE6967;
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    height: 40px;
+    margin-left: 20px;
+    margin-right: 20px;
+    line-height: 40px;
+    text-align: center;
+    width: calc(100% - 40px);
+    margin-top: 29px;
+    margin-bottom: 20px;
+}
+
+.search-page-button-disabled {
+    pointer-events: none;
+}
+
+/**
+ * Search Result Page
+ */
+.search-result-page {
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    transition: left 0.5s ease 0s;
+    background-color: #f3f4fe;
+}
+
+.search-result-page-overview {
+    height: 103px;
+    margin: 20px;
+}
+
+.search-result-page-illustration {
+    position: absolute;
+    right: 8px;
+    top: 20px;
+    width: 187px;
+    height: 187px;
+    z-index: -1;
+}
+
+.search-result-page-back-button {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    left: 20px;
+    top: 20px;
+}
+
+.search-result-page-overview-dest {
+    margin-top: 80px;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.4);
+}
+
+.search-result-page-overview-min {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.search-result-page-overview-time {
+    font-size: 14px;
+}
+
+.search-result-page-detail {
+    background-color: #fefdf3;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    min-height: calc(100% - 204px);
+    font-size: 14px;
+}
+
+.search-result-page-detail-section {
+    margin-top: 6px;
+}
+
+.search-result-page-detail-title {
+    font-weight: bold;
+    margin-left: 58px;
+    margin-top: 34px;
+}
+
+.search-result-page-detail-subtitle {
+    margin-top: 2px;
+    margin-left: 58px;
+}
+
+.search-result-page-detail-subsubtitle {
+    font-size: 10px;
+    color: rgba(0,0,0,0.4);
+    margin-left: 58px;
+}
+
+.search-result-page-detail-time,
+.search-result-page-detail-time-hl {
+    right: 23px;
+    position: absolute;
+}
+
+.search-result-page-detail-time-hl {
+    font-weight: bold;
+    color: #ff6867;
+}
+
+.search-result-page-detail-link {
+    font-size: 12px;
+    margin-left: 58px;
+    text-decoration: underline;
+    color: #7986bf;
+}
+
+.search-result-page-detail-icon {
+    height: 27px;
+    position: absolute;
+    margin-left: 58px;
+    margin-top: -2px;
+}
+
+.search-result-page-detail-gap {
+    height: 5px;
+}
+
+.search-result-page-detail-gap-lg {
+    height: 21px;
+}
+
+.icon {
+    position: absolute;
+    background: #7986bf;
+    left: 25px;
+    width: 16px;
+}
+.vl {
+    top: 250px;
+    height: 190px;
+}
+.t-o {
+    top: 242px;
+    height: 10px;
+    width: 10px;
+    background: #fff;
+    border: solid 3px #7986bf;
+    border-radius: 100px;
+}
+.t-i {
+    top: 247px;
+    left: 30px;
+    width: 6px;
+    height: 6px;
+    border-radius: 12px;
+}
+.b {
+    top: 433px;
+    height: 10px;
+    width: 10px;
+    background: #fff;
+    border: solid 3px #7986bf;
+    border-radius: 12px;
+}
+.dot3-1, .dot3-2, .dot3-3 {
+    width: 12px;
+    height: 12px;
+    border-radius: 10px;
+    left: 27px;
+    top: 458px;
+}
+.dot3-2 {
+    top: 479px;
+}
+.dot3-3 {
+    top: 500px;
+}
+.b-o {
+    top: 524px;
+    height: 10px;
+    width: 10px;
+    background: #fff;
+    border: solid 3px #7986bf;
+    border-radius: 100px;
+}
+.b-i {
+    top: 529px;
+    left: 30px;
+    width: 6px;
+    height: 6px;
+    border-radius: 12px;
+}
+
+/**
+ * Info Page
+ */
+.info-page {
+    position: fixed;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    transition: top 0.5s ease 0s;
+    background-color: #fefdf3;
+}
+
+/**
+ * Schedule Page
+ */
+.schedule-page {
+    position: fixed;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    transition: top 0.5s ease 0s;
+    background-color: #fefdf3;
+}
+
+.close-button {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    width: 30px;
+    height: 30px;
+}
+
+/**
+ * Deprecated
+ */
 .App-logo {
   height: 40vmin;
   pointer-events: none;
