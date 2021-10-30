@@ -70,7 +70,7 @@ function SearchResultPage(props) {
             setNaverTime(data.data.data.bus.realtime);
             setGoyangTime(data.data.data.bus.expectations.value[0]);
             setNextBusArriveTime(timeStr(data.data.timestamp, data.data.data.bus.expectations.value[1]));
-            setNaverBusArriveTime(timeStr(data.data.timestamp, data.data.data.bus.realtime));
+            setNaverBusArriveTime(timeStr(data.data.timestamp, data.data.data.bus.expectations.value[0]));
 
             setDepartTimeMinusWalk(timeStr(data.data.data.estimated_arrival_time, "-2"));
             setSubwayDetailUpward(data.data.data.subway.upward.join(', '));
