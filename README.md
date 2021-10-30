@@ -43,7 +43,7 @@
        cd api; sudo docker build . -t api:0.01; \
        cd ..;
    - ### 모든 서비스 기동 (도커 이미지)
-     > docker-compose up -d; \
+     > docker-compose up -d --build; \
        docker ps;  # 컨테이너 기동 상태 확인하기
    - ### 모든 서비스 종료
      > docker-compose stop; \

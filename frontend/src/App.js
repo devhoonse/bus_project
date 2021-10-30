@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {useState, useRef} from 'react';
 import styled from "styled-components";
 import ImageFadeIn from "react-image-fade-in";
 import {NavLink, Route} from "react-router-dom";
@@ -23,130 +23,53 @@ import setting_hover from "./media/img/setting_hover.png";
 import setting_select from "./media/img/setting_select.png";
 import Intro from "./components/Intro";
 
+import SearchPage from "./SearchPage.js";
+import SearchResultPage from "./SearchResultPage.js";
+import InfoPage from "./InfoPage.js";
+import SchedulePage from "./SchedulePage.js";
+import './App.css';
 
-const GomataTemplate = styled.div`
-
-  width: 100%;
-  height: 100%;
-  max-width: 500px;
-  max-height: 833px;
-  overflow-y: auto;
-
-  margin-left: auto;
-  margin-right: auto;
-  // margin-top: 6rem;
-  border-radius: 5px;
-  // background: #5c7cfa;
-  
-  Intro {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    maxWidth: 500px;
-    height: ${props => props.clicked ? '0' : '100%'};
-    maxHeight: 833px;
-  }
-  
-  div.main {
-    position: relative;
-    top: 0;
-    width: 100%;
-    maxWidth: 500px;
-    height: ${props => !props.clicked ? '0' : '100%'};
-    maxHeight: 833px;
-    
-    div.navbar {
-      // background: #22b8cf;
-      // color: white;
-      // height: 4rem;
-      // z-index: 300,
-      position: sticky;
-      top: 0;
-      font-size: 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0;
-      margin: 0;
-      list-style: none;
-      
-      div#Setting {
-        width: 33.33%;
-        z-index: 1000;
-      }
-      div#Dashboard {
-        width: 33.33%;
-        z-index: 1000;
-      }
-      div#Timetable {
-        flex: 1;
-        z-index: 1000;
-      }
-    }
-  
-    div.content {
-      background: white;
-      top: 0;
-      z-index: 1;
-    }  
-  }
-}
-`;
-
+const DEBUG_MODE = false;
 
 const App = () => {
 
-    const [clicked, setClicked] = useState(false);
-    const handleClick = useCallback(() => {
-      setClicked(!clicked);
-    }, []);
+    const [showSearchResult, setShowSearchResult] = useState(DEBUG_MODE);
+    const [showInfoPage, setShowInfoPage] = useState(DEBUG_MODE);
+    const [showSchedule, setShowSchedule] = useState(DEBUG_MODE);
+
+    const [selectedBus, setSelectedBus] = useState('');
+    const [selectedSub, setSelectedSub] = useState('');
+    const [schedule, setSchedule] = useState([]);
 
     return (
-        <GomataTemplate clicked={clicked}>
-          {
-            !clicked &&
-            <Intro imgSrc={home}
-                   clicked={clicked}
-                   handleClick={handleClick}
+        <>
+            <SearchPage 
+                onSearch={props => { 
+                    setSelectedBus(props.selectedBus);
+                    setSelectedSub(props.selectedSub);
+                    setShowSearchResult(true); 
+                }}
+                onInfo={() => setShowInfoPage(true)}
             />
-          }
-          {
-            clicked &&
-            <div className={"main"}>
-              <div className={"navbar"}>
-                <div id={"Setting"}>
-                  <NavLinkButton to={"/"}
-                                 exact={true}
-                                 active={setting_select}
-                                 nonactive={setting_default}
-                                 hover={setting_hover}
-                  />
-                </div>
-                <div id={"Dashboard"}>
-                  <NavLinkButton to={"/dashboard"}
-                                 // exact={true}
-                                 active={home_select}
-                                 nonactive={home_default}
-                                 hover={home_hover}
-                  />
-                </div>
-                <div id={"Timetable"}>
-                  <NavLinkButton to={"/timetable"}
-                                 active={schedule_select}
-                                 nonactive={schedule_default}
-                                 hover={schedule_hover}
-                  />
-                </div>
-
-              </div>
-              <div className={"content"}>
-                <Route path={"/"} render={() => <SettingContainer marginY={"2rem"} />} exact={true} />
-                <Route path={"/dashboard"} component={HomeContainer} />
-                <Route path={"/timetable"} component={TimetableContainer} />
-              </div>
-            </div>
-          }
-        </GomataTemplate>
+            <InfoPage
+                hide={!showInfoPage}
+                onHide={() => setShowInfoPage(false)}
+            />
+            <SearchResultPage 
+                bus={selectedBus}
+                sub={selectedSub}
+                hide={!showSearchResult}
+                onHide={() => setShowSearchResult(false)}
+                onSchedule={() => setShowSchedule(true)}
+                setSchedule={(props) => setSchedule(props)}
+            />
+            <SchedulePage
+                bus={selectedBus}
+                sub={selectedSub}
+                hide={!showSchedule}
+                onHide={() => setShowSchedule(false)}
+            />
+        </>
     );
 };
 
