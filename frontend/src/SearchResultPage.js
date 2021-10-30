@@ -78,7 +78,7 @@ function SearchResultPage(props) {
         
             setIsSuccess(true);
         });
-    }, [bus, sub]);
+    }, [hide, bus, sub]);
 
     return (
         <div className='search-result-page' style={{ left: hide ? '100%' : 0 }}>
