@@ -37,9 +37,8 @@ const App = () => {
     const [showInfoPage, setShowInfoPage] = useState(DEBUG_MODE);
     const [showSchedule, setShowSchedule] = useState(DEBUG_MODE);
 
-    const [selectedBus, setSelectedBus] = useState('');
-    const [selectedSub, setSelectedSub] = useState('');
-    const [schedule, setSchedule] = useState([]);
+    const [selectedBus, setSelectedBus] = useState({ id: 218000542, name: '샘터마을1단지.무원고등학교' });
+    const [selectedSub, setSelectedSub] = useState({ id: '행신역', name: '행신역' });
 
     return (
         <>
@@ -50,6 +49,7 @@ const App = () => {
                     setShowSearchResult(true); 
                 }}
                 onInfo={() => setShowInfoPage(true)}
+                onSchedule={() => setShowSchedule(true)}
             />
             <InfoPage
                 hide={!showInfoPage}
@@ -61,7 +61,6 @@ const App = () => {
                 hide={!showSearchResult}
                 onHide={() => setShowSearchResult(false)}
                 onSchedule={() => setShowSchedule(true)}
-                setSchedule={(props) => setSchedule(props)}
             />
             <SchedulePage
                 bus={selectedBus}
