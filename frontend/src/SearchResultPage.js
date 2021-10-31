@@ -63,14 +63,17 @@ function SearchResultPage(props) {
 
             // console.log(data.data);
 
-            setRunTime(data.data.data.estimated_run_time);
+            setRunTime(data.data.data.total_duration);
             setDepartTime(timeStr(data.data.timestamp));
             setArriveTime(timeStr(data.data.data.estimated_arrival_time));
 
             setNaverTime(data.data.data.bus.realtime);
             setGoyangTime(data.data.data.bus.expectations.value[0]);
-            setNextBusArriveTime(timeStr(data.data.timestamp, data.data.data.bus.expectations.value[1]));
-            setNaverBusArriveTime(timeStr(data.data.timestamp, data.data.data.bus.expectations.value[0]));
+	    setNextBusArriveTime(data.data.data.bus.expectations.nextArrivalTime);
+	    setNaverBusArriveTime(data.data.data.bus.expectations.firstArrivalTime);
+	    //setNextBusArriveTime(timeStr(data.data.timestamp, data.data.data.bus.expectations.value[1]));
+            //setNaverBusArriveTime(timeStr(data.data.timestamp, data.data.data.bus.expectations.value[0]));
+            //setNaverBusArriveTime(timeStr(data.data.timestamp, data.data.data.bus.expectations.realtime));
 
             setDepartTimeMinusWalk(timeStr(data.data.data.estimated_arrival_time, "-2"));
             setSubwayDetailUpward(data.data.data.subway.upward.join(', '));
@@ -105,12 +108,12 @@ function SearchResultPage(props) {
                     <div className='search-result-page-detail-gap'/>
                     <div>
                         <img className='search-result-page-detail-icon' src={busIcon} alt='Bus Icon'/>
-                        <span className='search-result-page-detail-subtitle' style={{ marginLeft: '181px' }}>{goyangTime ? `또는 ${goyangTime}분 후 도착` : '정보 없음'}</span>
+                        <span className='search-result-page-detail-subtitle' style={{ marginLeft: '181px' }}>{goyangTime ? `${goyangTime}분 후 도착` : '정보 없음'}</span>
                         <span className='search-result-page-detail-time-hl'>{naverBusArriveTime ?? ''}</span>
                     </div>
                     <div className='search-result-page-detail-subsubtitle' style={{ marginLeft: '181px' }}>고양시 데이터 기반</div>
-                    <span className='search-result-page-detail-subtitle' style={{ marginLeft: '181px' }}>{naverTime ? `${naverTime}분 후 도착` : '정보 없음'}</span>
-                    <div className='search-result-page-detail-subsubtitle' style={{ marginLeft: '181px' }}>네이버 실시간 정보 기반</div>
+                    <span className='search-result-page-detail-subtitle' style={{ marginLeft: '181px' }}>{naverTime ? `또는 ${naverTime}분 후 도착` : '정보 없음'}</span>
+                    <div className='search-result-page-detail-subsubtitle' style={{ marginLeft: '181px' }}>네이버 실시간 조회</div>
                     <div className='search-result-page-detail-gap'/>
                     <div>
                         <span className='search-result-page-detail-subtitle'>{'다음 도착 예정 시간'}</span>
