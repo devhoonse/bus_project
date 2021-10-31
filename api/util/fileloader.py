@@ -105,11 +105,18 @@ def schedule_d(bus_id, date, bus_station_id):
 
 
 def arrival_time_gmt(schedule_detail, now_a):
+    def check_len(int_hm):
+        a = str(int_hm)
+        if len(a) == 1:
+            return("0" + a)
+        else:
+            return(a)
+
     df_res = pd.DataFrame(schedule_detail)
     h = now_a.hour
     m = now_a.minute
     s1 = df_res.apply(lambda x: int(x['h']) >= h, axis=1)
-    s2 = df_res.apply(lambda x: int(x['h']) >= h and int(x['m'] > m) or int(x['h']) > 7, axis=1)
-    res_list = df_res[s1 & s2][:2].apply(lambda x: str(x["h"]) + ":" + str(x['m']), axis=1).to_list()
+    s2 = df_res.apply(lambda x: int(x['h']) >= h and int(x['m'] > m) or int(x['h']) > h, axis=1)
+    res_list = df_res[s1 & s2][:2].apply(lambda x: check_len(x["h"]) + ":" + check_len(x['m']), axis=1).to_list()
     return res_list
 
