@@ -19,8 +19,7 @@
 
 # 3. How to Run Test
    ## 0) 전체 서비스 한 번에 기동하기
-   - ### 전체 서비스 구성도
-     ![ex_screenshot](api/media/img/fe9c093d-4312-45a9-8f73-7f977db8d0d3.jpg)
+   
    - ### 서비스 사용 테스트
      1. 프론트엔드 : http://localhost
      2. API 서버 : http://localhost/api
